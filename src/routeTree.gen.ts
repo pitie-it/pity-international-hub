@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ImpactRouteImport } from './routes/impact'
+import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes/index'
 import { Route as ProgrammesSlugRouteImport } from './routes/programmes/$slug'
 
@@ -30,6 +31,11 @@ const ImpactRoute = ImpactRouteImport.update({
   path: '/impact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OuNousTravaillonsRoute = OuNousTravaillonsRouteImport.update({
+  id: '/ou-nous-travaillons',
+  path: '/ou-nous-travaillons',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
   id: '/programmes/',
   path: '/programmes/',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
@@ -60,20 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/a-propos' | '/impact' | '/programmes/$slug' | '/programmes/'
+    | '/'
+    | '/a-propos'
+    | '/impact'
+    | '/ou-nous-travaillons'
+    | '/programmes/$slug'
+    | '/programmes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a-propos' | '/impact' | '/programmes/$slug' | '/programmes'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/impact'
+    | '/ou-nous-travaillons'
+    | '/programmes/$slug'
+    | '/programmes'
   id:
     | '__root__'
     | '/'
     | '/a-propos'
     | '/impact'
+    | '/ou-nous-travaillons'
     | '/programmes/$slug'
     | '/programmes/'
   fileRoutesById: FileRoutesById
@@ -82,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
   ImpactRoute: typeof ImpactRoute
+  OuNousTravaillonsRoute: typeof OuNousTravaillonsRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
   ProgrammesIndexRoute: typeof ProgrammesIndexRoute
 }
@@ -109,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImpactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ou-nous-travaillons': {
+      id: '/ou-nous-travaillons'
+      path: '/ou-nous-travaillons'
+      fullPath: '/ou-nous-travaillons'
+      preLoaderRoute: typeof OuNousTravaillonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programmes/': {
       id: '/programmes/'
       path: '/programmes'
@@ -130,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
   ImpactRoute: ImpactRoute,
+  OuNousTravaillonsRoute: OuNousTravaillonsRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
 }
