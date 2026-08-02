@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as AgirRouteImport } from './routes/agir'
+import { Route as DonRouteImport } from './routes/don'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes/index'
@@ -30,6 +31,11 @@ const AProposRoute = AProposRouteImport.update({
 const AgirRoute = AgirRouteImport.update({
   id: '/agir',
   path: '/agir',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonRoute = DonRouteImport.update({
+  id: '/don',
+  path: '/don',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpactRoute = ImpactRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/agir': typeof AgirRoute
+  '/don': typeof DonRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/agir': typeof AgirRoute
+  '/don': typeof DonRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/agir': typeof AgirRoute
+  '/don': typeof DonRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/agir'
+    | '/don'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/programmes/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/agir'
+    | '/don'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/programmes/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/agir'
+    | '/don'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/programmes/$slug'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
   AgirRoute: typeof AgirRoute
+  DonRoute: typeof DonRoute
   ImpactRoute: typeof ImpactRoute
   OuNousTravaillonsRoute: typeof OuNousTravaillonsRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/agir'
       fullPath: '/agir'
       preLoaderRoute: typeof AgirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/don': {
+      id: '/don'
+      path: '/don'
+      fullPath: '/don'
+      preLoaderRoute: typeof DonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impact': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
   AgirRoute: AgirRoute,
+  DonRoute: DonRoute,
   ImpactRoute: ImpactRoute,
   OuNousTravaillonsRoute: OuNousTravaillonsRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
