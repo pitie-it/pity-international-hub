@@ -135,7 +135,7 @@ function Home() {
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {programmes.slice(0, 6).map((p, i) => {
-              const Icon = pillarIcons[i % pillarIcons.length];
+              const Icon = pillarIcons[i % pillarIcons.length]!;
               return (
                 <Reveal key={p.slug} delay={i * 0.06}>
                   <Link to="/programmes/$slug" params={{ slug: p.slug }} className="card-surface group block h-full overflow-hidden">
