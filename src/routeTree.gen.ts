@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as ActualitesRouteImport } from './routes/actualites'
+import { Route as AgirRouteImport } from './routes/agir'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DonRouteImport } from './routes/don'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as ImpactRouteImport } from './routes/impact'
+import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
+import { Route as PartenairesRouteImport } from './routes/partenaires'
+import { Route as ProgrammesIndexRouteImport } from './routes/programmes/index'
+import { Route as ProgrammesSlugRouteImport } from './routes/programmes/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActualitesRoute = ActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgirRoute = AgirRouteImport.update({
+  id: '/agir',
+  path: '/agir',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonRoute = DonRouteImport.update({
+  id: '/don',
+  path: '/don',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpactRoute = ImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OuNousTravaillonsRoute = OuNousTravaillonsRouteImport.update({
+  id: '/ou-nous-travaillons',
+  path: '/ou-nous-travaillons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartenairesRoute = PartenairesRouteImport.update({
+  id: '/partenaires',
+  path: '/partenaires',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
+  id: '/programmes/',
+  path: '/programmes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammesSlugRoute = ProgrammesSlugRouteImport.update({
+  id: '/programmes/$slug',
+  path: '/programmes/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/actualites': typeof ActualitesRoute
+  '/agir': typeof AgirRoute
+  '/contact': typeof ContactRoute
+  '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
+  '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
+  '/partenaires': typeof PartenairesRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/programmes/': typeof ProgrammesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/actualites': typeof ActualitesRoute
+  '/agir': typeof AgirRoute
+  '/contact': typeof ContactRoute
+  '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
+  '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
+  '/partenaires': typeof PartenairesRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/programmes': typeof ProgrammesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/actualites': typeof ActualitesRoute
+  '/agir': typeof AgirRoute
+  '/contact': typeof ContactRoute
+  '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
+  '/impact': typeof ImpactRoute
+  '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
+  '/partenaires': typeof PartenairesRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/programmes/': typeof ProgrammesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/a-propos'
+    | '/actualites'
+    | '/agir'
+    | '/contact'
+    | '/don'
+    | '/galerie'
+    | '/impact'
+    | '/ou-nous-travaillons'
+    | '/partenaires'
+    | '/programmes/$slug'
+    | '/programmes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/actualites'
+    | '/agir'
+    | '/contact'
+    | '/don'
+    | '/galerie'
+    | '/impact'
+    | '/ou-nous-travaillons'
+    | '/partenaires'
+    | '/programmes/$slug'
+    | '/programmes'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-propos'
+    | '/actualites'
+    | '/agir'
+    | '/contact'
+    | '/don'
+    | '/galerie'
+    | '/impact'
+    | '/ou-nous-travaillons'
+    | '/partenaires'
+    | '/programmes/$slug'
+    | '/programmes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AProposRoute: typeof AProposRoute
+  ActualitesRoute: typeof ActualitesRoute
+  AgirRoute: typeof AgirRoute
+  ContactRoute: typeof ContactRoute
+  DonRoute: typeof DonRoute
+  GalerieRoute: typeof GalerieRoute
+  ImpactRoute: typeof ImpactRoute
+  OuNousTravaillonsRoute: typeof OuNousTravaillonsRoute
+  PartenairesRoute: typeof PartenairesRoute
+  ProgrammesSlugRoute: typeof ProgrammesSlugRoute
+  ProgrammesIndexRoute: typeof ProgrammesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +195,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/actualites': {
+      id: '/actualites'
+      path: '/actualites'
+      fullPath: '/actualites'
+      preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agir': {
+      id: '/agir'
+      path: '/agir'
+      fullPath: '/agir'
+      preLoaderRoute: typeof AgirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/don': {
+      id: '/don'
+      path: '/don'
+      fullPath: '/don'
+      preLoaderRoute: typeof DonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impact': {
+      id: '/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof ImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ou-nous-travaillons': {
+      id: '/ou-nous-travaillons'
+      path: '/ou-nous-travaillons'
+      fullPath: '/ou-nous-travaillons'
+      preLoaderRoute: typeof OuNousTravaillonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partenaires': {
+      id: '/partenaires'
+      path: '/partenaires'
+      fullPath: '/partenaires'
+      preLoaderRoute: typeof PartenairesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programmes/': {
+      id: '/programmes/'
+      path: '/programmes'
+      fullPath: '/programmes/'
+      preLoaderRoute: typeof ProgrammesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programmes/$slug': {
+      id: '/programmes/$slug'
+      path: '/programmes/$slug'
+      fullPath: '/programmes/$slug'
+      preLoaderRoute: typeof ProgrammesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AProposRoute: AProposRoute,
+  ActualitesRoute: ActualitesRoute,
+  AgirRoute: AgirRoute,
+  ContactRoute: ContactRoute,
+  DonRoute: DonRoute,
+  GalerieRoute: GalerieRoute,
+  ImpactRoute: ImpactRoute,
+  OuNousTravaillonsRoute: OuNousTravaillonsRoute,
+  PartenairesRoute: PartenairesRoute,
+  ProgrammesSlugRoute: ProgrammesSlugRoute,
+  ProgrammesIndexRoute: ProgrammesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
