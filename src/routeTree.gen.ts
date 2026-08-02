@@ -14,6 +14,7 @@ import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as AgirRouteImport } from './routes/agir'
 import { Route as DonRouteImport } from './routes/don'
+import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
 import { Route as PartenairesRouteImport } from './routes/partenaires'
@@ -43,6 +44,11 @@ const AgirRoute = AgirRouteImport.update({
 const DonRoute = DonRouteImport.update({
   id: '/don',
   path: '/don',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpactRoute = ImpactRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
   '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
   '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
   '/don': typeof DonRoute
+  '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/actualites'
     | '/agir'
     | '/don'
+    | '/galerie'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/partenaires'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/actualites'
     | '/agir'
     | '/don'
+    | '/galerie'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/partenaires'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/actualites'
     | '/agir'
     | '/don'
+    | '/galerie'
     | '/impact'
     | '/ou-nous-travaillons'
     | '/partenaires'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   ActualitesRoute: typeof ActualitesRoute
   AgirRoute: typeof AgirRoute
   DonRoute: typeof DonRoute
+  GalerieRoute: typeof GalerieRoute
   ImpactRoute: typeof ImpactRoute
   OuNousTravaillonsRoute: typeof OuNousTravaillonsRoute
   PartenairesRoute: typeof PartenairesRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/don'
       fullPath: '/don'
       preLoaderRoute: typeof DonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impact': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   ActualitesRoute: ActualitesRoute,
   AgirRoute: AgirRoute,
   DonRoute: DonRoute,
+  GalerieRoute: GalerieRoute,
   ImpactRoute: ImpactRoute,
   OuNousTravaillonsRoute: OuNousTravaillonsRoute,
   PartenairesRoute: PartenairesRoute,
