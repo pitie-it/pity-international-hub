@@ -2,7 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { ArrowLeft, CheckCircle2, Quote, Target, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { programmes } from "@/lib/site-data";
+import { programmes, type Programme } from "@/lib/site-data";
 
 export const Route = createFileRoute("/programmes/$slug")({
   loader: ({ params }) => {
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/programmes/$slug")({
 });
 
 function ProgrammeDetail() {
-  const { programme } = Route.useLoaderData();
+  const { programme } = Route.useLoaderData() as { programme: Programme };
 
   return (
     <>
