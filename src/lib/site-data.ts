@@ -399,12 +399,31 @@ export const galleryItems = [
   { src: media.suivi, title: "Suivi d'un atelier de couture financé par PI", album: "Justice économique" },
 ];
 
+export const donationAmounts = ["15", "45", "85", "100", "1000"];
+
 export const donationTiers = [
-  { amount: "25 $", text: "Un kit de semences pour une famille agricole." },
-  { amount: "60 $", text: "Une prise en charge nutritionnelle pour un enfant." },
-  { amount: "150 $", text: "Un kit de démarrage d'activité pour une femme entrepreneure." },
-  { amount: "500 $", text: "Un point d'eau réhabilité pour une communauté." },
+  { amount: "15 USD", text: "Un kit de semences pour une famille agricole." },
+  { amount: "45 USD", text: "Un appui nutritionnel pour un enfant vulnérable." },
+  { amount: "85 USD", text: "Un kit de démarrage d'activité génératrice de revenus." },
+  { amount: "100 USD", text: "Une assistance d'urgence pour un ménage déplacé." },
+  { amount: "1000 USD", text: "Un point d'eau réhabilité pour toute une communauté." },
 ];
+
+export const pays = [
+  { name: "République Démocratique du Congo", code: "+243" },
+  { name: "Belgique", code: "+32" },
+  { name: "France", code: "+33" },
+  { name: "Canada", code: "+1" },
+  { name: "États-Unis", code: "+1" },
+  { name: "Royaume-Uni", code: "+44" },
+  { name: "Suisse", code: "+41" },
+  { name: "Rwanda", code: "+250" },
+  { name: "Ouganda", code: "+256" },
+  { name: "Kenya", code: "+254" },
+  { name: "Afrique du Sud", code: "+27" },
+  { name: "Autre pays", code: "+000" },
+];
+
 
 export const paymentMethods = [
   "Carte bancaire",
