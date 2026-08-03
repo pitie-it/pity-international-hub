@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Scale, ShieldCheck, Globe2 } from "lucide-react";
 import { PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
-import { media, principes, timeline, valeurs } from "@/lib/site-data";
+import { axesProgrammatiques, groupesCibles, media, principes, timeline, valeurs } from "@/lib/site-data";
+
 
 export const Route = createFileRoute("/a-propos")({
   component: APropos,
