@@ -140,7 +140,7 @@ export type Programme = {
   objectifs: string[];
   activites: string[];
   resultats: string[];
-  temoignage: { quote: string; author: string };
+  temoignage?: { quote: string; author: string };
 };
 
 export const programmes: Programme[] = [
@@ -150,315 +150,129 @@ export const programmes: Programme[] = [
     tagline: "Produire, nourrir, générer des revenus durables.",
     image: media.recolte,
     presentation:
-      "Le programme SAME renforce la capacité des ménages vulnérables à produire, conserver et commercialiser leur production agricole, tout en diversifiant leurs sources de revenus.",
+      "Le programme SAME renforce la capacité des ménages vulnérables à produire, conserver et commercialiser leur production agricole, tout en diversifiant durablement leurs sources de revenus.",
     objectifs: [
       "Améliorer la disponibilité et l'accès à une alimentation nutritive",
-      "Augmenter les revenus agricoles des ménages accompagnés",
+      "Augmenter et diversifier les revenus des ménages accompagnés",
       "Renforcer la résilience face aux chocs climatiques et sécuritaires",
     ],
     activites: [
-      "Distribution de semences améliorées et d'outils agricoles",
-      "Appui aux champs-écoles paysans et à l'agroécologie",
-      "Structuration de coopératives et accès aux marchés",
-      "Transferts monétaires et foires aux vivres",
+      "Agriculture durable et agroécologie",
+      "Appui aux activités génératrices de revenus (AGR)",
+      "Appui à la création et à la redynamisation des MUSOPEC et des AVEC",
+      "Entrepreneuriat",
+      "Formation professionnelle",
+      "Développement des chaînes de valeur",
     ],
     resultats: [
-      "Hausse mesurée des rendements de pomme de terre et de haricot",
-      "Réduction des périodes de soudure dans les ménages appuyés",
-      "Groupements agricoles fonctionnels et autonomes",
+      "Hausse des rendements agricoles des ménages appuyés",
+      "Réduction des périodes de soudure",
+      "Groupements et mutuelles d'épargne fonctionnels",
     ],
-    temoignage: {
-      quote: "Grâce aux semences et à l'accompagnement, ma récolte a doublé et mes enfants mangent trois fois par jour.",
-      author: "Furaha M., agricultrice, Nord-Kivu",
-    },
+  },
+  {
+    slug: "autonomisation-femmes-jeunes",
+    title: "Autonomisation économique des femmes et des jeunes",
+    tagline: "Des opportunités économiques pour celles et ceux qui en sont privés.",
+    image: media.haricot,
+    presentation:
+      "Ce programme lève les barrières économiques qui limitent les femmes et les jeunes, et soutient leurs initiatives génératrices de revenus ainsi que leur leadership.",
+    objectifs: [
+      "Renforcer l'autonomie financière des femmes et des jeunes",
+      "Faciliter l'accès aux services financiers",
+      "Promouvoir le leadership économique féminin",
+    ],
+    activites: [
+      "Promotion du leadership féminin",
+      "Inclusion économique",
+      "Entrepreneuriat des jeunes et des femmes",
+      "Accès aux services financiers",
+    ],
+    resultats: [
+      "Activités économiques stables créées et accompagnées",
+      "Accès élargi à l'épargne et au crédit",
+      "Participation accrue des femmes aux décisions économiques",
+    ],
   },
   {
     slug: "responsabilite-sociale-gouvernance",
     title: "Responsabilité sociale et gouvernance",
-    tagline: "Des services publics redevables aux citoyens.",
+    tagline: "Des communautés informées, organisées et écoutées.",
     image: media.suivi,
     presentation:
-      "Nous accompagnons les communautés dans le suivi participatif des services publics et le dialogue constructif avec les autorités locales.",
+      "Nous accompagnons les communautés dans la participation citoyenne, la connaissance de leurs droits et le dialogue constructif avec les autorités locales.",
     objectifs: [
       "Renforcer la participation citoyenne dans la gestion locale",
-      "Améliorer la transparence budgétaire des entités décentralisées",
-      "Créer des espaces de dialogue communauté – autorités",
+      "Améliorer l'accès à la documentation civile et la sécurisation foncière",
+      "Créer des espaces de dialogue entre communautés et autorités",
     ],
     activites: [
-      "Mise en place de comités de suivi citoyen",
-      "Fiches d'évaluation communautaire des services",
-      "Cadres de concertation et plaidoyer local",
+      "Informations, formations et conseils sur la documentation civile (LCD) et le Logement, la Terre et la Propriété (LTP)",
+      "Participation citoyenne",
+      "Renforcement des organisations communautaires",
+      "Sensibilisation aux droits et devoirs civiques",
+      "Appui à la résolution collaborative des différends",
+      "Gouvernance locale",
+      "Dialogue communautaire",
+      "Cohésion sociale",
     ],
     resultats: [
-      "Engagements publics pris et suivis par les autorités locales",
-      "Comités citoyens actifs dans plusieurs entités",
+      "Organisations communautaires renforcées",
+      "Différends résolus par des mécanismes collaboratifs",
+      "Engagements publics suivis par les communautés",
     ],
-    temoignage: {
-      quote: "Nous savons désormais poser les bonnes questions et suivre les engagements pris pour notre village.",
-      author: "Jean-Baptiste K., membre d'un comité de suivi",
-    },
   },
   {
-    slug: "justice-economique-femmes",
-    title: "Justice économique pour les femmes",
-    tagline: "Autonomiser les femmes par l'entrepreneuriat.",
-    image: media.haricot,
-    presentation:
-      "Ce programme lève les barrières économiques qui limitent les femmes et soutient leurs initiatives génératrices de revenus.",
-    objectifs: [
-      "Renforcer l'autonomie financière des femmes",
-      "Faciliter l'accès au crédit et à l'épargne communautaire",
-      "Promouvoir le leadership économique féminin",
-    ],
-    activites: [
-      "Groupes d'épargne et de crédit (AVEC)",
-      "Formations en gestion et en entrepreneuriat",
-      "Kits de démarrage d'activités (couture, commerce, transformation)",
-    ],
-    resultats: [
-      "Des centaines de femmes disposant d'une activité stable",
-      "Augmentation de l'épargne des groupes accompagnés",
-    ],
-    temoignage: {
-      quote: "Mon atelier de couture emploie aujourd'hui trois jeunes femmes de mon quartier.",
-      author: "Espérance B., entrepreneure, Goma",
-    },
-  },
-  {
-    slug: "justice-economique-jeunesse",
-    title: "Justice économique pour la jeunesse",
-    tagline: "Des compétences et des emplois pour les jeunes.",
-    image: media.grain,
-    presentation:
-      "Nous accompagnons les jeunes vers l'emploi décent et l'auto-emploi grâce à la formation professionnelle et à l'appui à l'entrepreneuriat.",
-    objectifs: [
-      "Réduire le chômage des jeunes dans les zones fragiles",
-      "Développer des compétences adaptées au marché local",
-      "Prévenir les recrutements par les groupes armés",
-    ],
-    activites: [
-      "Formations professionnelles courtes et qualifiantes",
-      "Incubation de micro-entreprises jeunes",
-      "Mentorat et mise en relation avec les employeurs",
-    ],
-    resultats: [
-      "Jeunes insérés dans un emploi ou une activité autonome",
-      "Coopératives de jeunes créées et opérationnelles",
-    ],
-    temoignage: {
-      quote: "La formation m'a donné un métier et une raison de rester dans ma communauté.",
-      author: "Patient N., 24 ans, Sud-Kivu",
-    },
-  },
-  {
-    slug: "genre-egalite",
-    title: "Genre et égalité des sexes",
-    tagline: "Transformer les normes, garantir l'égalité.",
+    slug: "genre-protection-inclusion",
+    title: "Genre, protection et inclusion",
+    tagline: "Protéger, inclure et faire avancer l'égalité.",
     image: media.semis,
     presentation:
-      "Le programme intègre l'égalité de genre dans toutes nos interventions et lutte contre les violences basées sur le genre.",
+      "Le programme intègre l'égalité de genre et la protection dans toutes nos interventions, et lutte contre les violences basées sur le genre.",
     objectifs: [
       "Prévenir et répondre aux violences basées sur le genre",
-      "Promouvoir la participation des femmes aux décisions",
-      "Faire évoluer les normes sociales discriminatoires",
+      "Promouvoir l'égalité entre les femmes et les hommes",
+      "Garantir l'inclusion des personnes les plus vulnérables",
     ],
     activites: [
-      "Dialogues communautaires et écoles des maris",
-      "Prise en charge et référencement des survivantes",
-      "Formation des leaders sur l'égalité de genre",
+      "Égalité entre les femmes et les hommes",
+      "Prévention et réponse aux violences basées sur le genre",
+      "Inclusion des personnes vulnérables",
+      "Protection communautaire",
     ],
     resultats: [
-      "Espaces sûrs fonctionnels pour les femmes et les filles",
-      "Représentation accrue des femmes dans les structures locales",
+      "Mécanismes communautaires de protection fonctionnels",
+      "Survivantes orientées vers des services adaptés",
+      "Participation accrue des femmes dans les structures locales",
     ],
-    temoignage: {
-      quote: "Aujourd'hui, ma voix compte dans les réunions du village.",
-      author: "Sifa L., leader communautaire",
-    },
   },
   {
-    slug: "sante-communautaire",
-    title: "Santé communautaire",
-    tagline: "Rapprocher les soins des populations.",
-    image: media.suivi,
-    presentation:
-      "Nous appuyons les structures de santé et les relais communautaires pour améliorer l'accès aux soins essentiels.",
-    objectifs: [
-      "Améliorer l'accès aux soins primaires",
-      "Renforcer la nutrition des enfants et des femmes enceintes",
-      "Prévenir les épidémies par la sensibilisation",
-    ],
-    activites: [
-      "Appui en médicaments et équipements",
-      "Dépistage nutritionnel communautaire",
-      "Campagnes de sensibilisation et relais communautaires",
-    ],
-    resultats: [
-      "Fréquentation accrue des structures de santé appuyées",
-      "Cas de malnutrition dépistés et référencés à temps",
-    ],
-    temoignage: {
-      quote: "Le relais communautaire a sauvé mon enfant en détectant sa malnutrition à temps.",
-      author: "Neema K., mère de famille",
-    },
-  },
-  {
-    slug: "sante-environnementale",
-    title: "Santé environnementale",
-    tagline: "Eau, hygiène et environnement sain.",
+    slug: "sante-communautaire-environnementale",
+    title: "Santé communautaire et environnementale",
+    tagline: "Prévenir, soigner et protéger l'environnement.",
     image: media.plantation,
     presentation:
-      "Nous améliorons l'accès à l'eau potable, à l'assainissement et protégeons les écosystèmes locaux.",
+      "Nous appuyons la promotion de l'hygiène, la prévention des maladies et la gestion environnementale, en accompagnant l'adaptation des communautés au changement climatique.",
     objectifs: [
-      "Garantir l'accès à l'eau potable",
-      "Améliorer les pratiques d'hygiène et d'assainissement",
-      "Restaurer les milieux dégradés",
+      "Améliorer les pratiques d'hygiène et prévenir les maladies",
+      "Renforcer la santé communautaire de proximité",
+      "Promouvoir une gestion durable de l'environnement",
     ],
     activites: [
-      "Aménagement de points d'eau et latrines",
-      "Promotion de l'hygiène dans les écoles",
-      "Reboisement et gestion des déchets",
+      "Promotion de l'hygiène",
+      "Prévention des maladies",
+      "Santé communautaire",
+      "Gestion environnementale",
+      "Adaptation au changement climatique",
     ],
     resultats: [
-      "Ménages disposant d'un accès durable à l'eau potable",
       "Réduction des maladies d'origine hydrique",
+      "Relais communautaires actifs",
+      "Pratiques agricoles et environnementales adaptées au climat",
     ],
-    temoignage: {
-      quote: "L'eau potable au village a changé notre quotidien et la santé de nos enfants.",
-      author: "Christine A., présidente du comité d'eau",
-    },
-  },
-  {
-    slug: "developpement-communautaire",
-    title: "Développement communautaire",
-    tagline: "Les communautés au pilotage de leur avenir.",
-    image: media.semis,
-    presentation:
-      "Nous appuyons les communautés à planifier, mettre en œuvre et suivre leurs propres projets de développement.",
-    objectifs: [
-      "Renforcer les structures communautaires de base",
-      "Financer des micro-projets à fort impact",
-      "Promouvoir la cohésion sociale",
-    ],
-    activites: [
-      "Plans de développement villageois participatifs",
-      "Infrastructures communautaires (écoles, marchés, pistes)",
-      "Activités de cohésion sociale et de paix",
-    ],
-    resultats: [
-      "Infrastructures communautaires réalisées et entretenues",
-      "Comités de développement villageois actifs",
-    ],
-    temoignage: {
-      quote: "C'est notre projet, décidé et suivi par nous-mêmes.",
-      author: "Comité de développement, Masisi",
-    },
-  },
-  {
-    slug: "reponse-humanitaire",
-    title: "Réponse humanitaire",
-    tagline: "Agir vite, agir juste, sauver des vies.",
-    image: media.recolte,
-    presentation:
-      "En cas de crise, nous déployons une assistance d'urgence multisectorielle aux déplacés et aux familles d'accueil.",
-    objectifs: [
-      "Répondre aux besoins vitaux immédiats",
-      "Réduire la mortalité et la morbidité en situation de crise",
-      "Assurer une transition vers le relèvement",
-    ],
-    activites: [
-      "Distribution de vivres et de biens non alimentaires",
-      "Assistance monétaire d'urgence",
-      "Abris d'urgence pour les ménages déplacés",
-    ],
-    resultats: [
-      "Milliers de personnes déplacées assistées",
-      "Réponses déployées en moins de 72 heures",
-    ],
-    temoignage: {
-      quote: "Quand nous avons tout perdu, l'assistance est arrivée en quelques jours.",
-      author: "Famille déplacée, Nord-Kivu",
-    },
-  },
-  {
-    slug: "protection",
-    title: "Protection",
-    tagline: "Protéger les personnes les plus exposées.",
-    image: media.suivi,
-    presentation:
-      "Nous prévenons les risques de protection et accompagnons les personnes affectées vers des services adaptés.",
-    objectifs: [
-      "Prévenir les violations des droits humains",
-      "Accompagner les survivants vers les services adaptés",
-      "Renforcer les mécanismes communautaires de protection",
-    ],
-    activites: [
-      "Monitoring de protection",
-      "Prise en charge psychosociale",
-      "Sensibilisation aux risques et référencement",
-    ],
-    resultats: [
-      "Réseaux communautaires de protection fonctionnels",
-      "Cas identifiés référencés vers des services spécialisés",
-    ],
-    temoignage: {
-      quote: "J'ai retrouvé de la confiance grâce à l'accompagnement psychosocial.",
-      author: "Bénéficiaire, Ituri",
-    },
-  },
-  {
-    slug: "resilience",
-    title: "Résilience",
-    tagline: "Anticiper les chocs, préparer l'avenir.",
-    image: media.plantation,
-    presentation:
-      "Nous renforçons la capacité des ménages et des communautés à absorber les chocs et à s'adapter durablement.",
-    objectifs: [
-      "Réduire la vulnérabilité aux chocs récurrents",
-      "Diversifier les moyens d'existence",
-      "Promouvoir l'adaptation au changement climatique",
-    ],
-    activites: [
-      "Systèmes d'alerte précoce communautaires",
-      "Agriculture climato-intelligente",
-      "Fonds communautaires de gestion des risques",
-    ],
-    resultats: [
-      "Plans communautaires de gestion des risques adoptés",
-      "Ménages disposant de revenus diversifiés",
-    ],
-    temoignage: {
-      quote: "Nous savons maintenant nous préparer avant que la crise n'arrive.",
-      author: "Comité d'alerte précoce, Sud-Kivu",
-    },
-  },
-  {
-    slug: "renforcement-des-capacites",
-    title: "Renforcement des capacités",
-    tagline: "Des acteurs locaux forts et durables.",
-    image: media.grain,
-    presentation:
-      "Nous formons et accompagnons les organisations locales, les autorités et les équipes terrain vers plus de qualité et de redevabilité.",
-    objectifs: [
-      "Professionnaliser les organisations de la société civile",
-      "Améliorer la qualité des interventions humanitaires",
-      "Favoriser la localisation de l'aide",
-    ],
-    activites: [
-      "Formations techniques et en gestion de projets",
-      "Coaching organisationnel et institutionnel",
-      "Appui à la conformité et à la redevabilité",
-    ],
-    resultats: [
-      "Organisations locales accompagnées vers l'autonomie",
-      "Amélioration des standards de qualité des projets",
-    ],
-    temoignage: {
-      quote: "Notre association gère désormais ses projets avec rigueur et transparence.",
-      author: "Coordonnateur d'une ONG locale partenaire",
-    },
   },
 ];
+
 
 export const impactStats = [
   { value: 42, suffix: "+", label: "Projets mis en œuvre" },
