@@ -127,7 +127,7 @@ function APropos() {
 
       {/* Valeurs */}
       <section className="container-page py-20 sm:py-24">
-        <SectionHeading eyebrow="Nos valeurs" title="Sept valeurs qui guident chaque décision" />
+        <SectionHeading eyebrow="Nos valeurs" title="Quatre valeurs qui guident chaque décision" />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {valeurs.map((v, i) => (
             <Reveal key={v.title} delay={i * 0.05}>
