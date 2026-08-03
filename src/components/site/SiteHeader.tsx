@@ -124,14 +124,13 @@ export function SiteHeader() {
 
       <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3">
         <Link to="/" className="flex min-w-0 items-center gap-3">
-          <img src={media.logo} alt="Logo Pitié Internationale" className="size-11 shrink-0 rounded-full object-contain" />
-          <span className="min-w-0">
-            <span className="block truncate font-display text-base font-bold leading-tight">Pitié Internationale</span>
-            <span className="block truncate text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
-              ONG humanitaire · RDC
-            </span>
-          </span>
+          <img
+            src={media.logoHorizontal}
+            alt="Logo Pitié Internationale — Pitié, Humanité, Entraide"
+            className="h-11 w-auto max-w-[240px] shrink-0 object-contain sm:h-12 sm:max-w-[300px]"
+          />
         </Link>
+
 
         <div className="flex items-center gap-1">
           <nav className="hidden items-center gap-0.5 xl:flex">
