@@ -26,7 +26,11 @@ export const Route = createFileRoute("/don")({
   }),
 });
 
-const amounts = ["25", "60", "150", "500"];
+const amounts = donationAmounts;
+
+export default function DonPage() {
+  const [amount, setAmount] = useState("45");
+
 
 function Don() {
   const [amount, setAmount] = useState("60");
