@@ -58,9 +58,12 @@ function Home() {
               Ensemble pour sauver des vies et restaurer la dignité humaine
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-              Depuis 2023, Pitié Internationale accompagne les populations affectées par les crises humanitaires en
-              République Démocratique du Congo grâce à des solutions durables, inclusives et innovantes.
+              Chez Pitié Internationale, nous croyons que chaque vie compte et que chaque personne mérite de vivre dans
+              la sécurité, la dignité et l'espoir. Aux côtés des communautés les plus vulnérables, nous transformons la
+              solidarité en actions concrètes pour répondre aux urgences humanitaires, renforcer la résilience des
+              populations et promouvoir un développement durable et inclusif.
             </p>
+
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-action text-action-foreground hover:bg-action/90">
                 <Link to="/programmes">
