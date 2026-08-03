@@ -10,6 +10,8 @@ import photoHaricot from "@/assets/recol_harico.jpg.asset.json";
 
 export const media = {
   logo: logo.url,
+  logoHorizontal: logoHorizontal.url,
+
   suivi: photoSuivi.url,
   grain: photoGrain.url,
   recolte: photoRecolte.url,
