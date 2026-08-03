@@ -11,10 +11,11 @@ export const Route = createFileRoute("/programmes/")({
       {
         name: "description",
         content:
-          "Sécurité alimentaire, santé, protection, genre, résilience, gouvernance : découvrez les douze programmes de Pitié Internationale en RDC.",
+          "Sécurité alimentaire, autonomisation économique, gouvernance, genre et protection, santé communautaire : les programmes intégrés de Pitié Internationale en RDC.",
       },
       { property: "og:title", content: "Nos Programmes — Pitié Internationale" },
-      { property: "og:description", content: "Douze programmes humanitaires et de développement en RDC." },
+      { property: "og:description", content: "Cinq programmes intégrés humanitaires et de développement en RDC." },
+
       { property: "og:url", content: "/programmes" },
     ],
     links: [{ rel: "canonical", href: "/programmes" }],
@@ -26,8 +27,9 @@ function Programmes() {
     <>
       <PageHero
         eyebrow="Nos programmes"
-        title="Douze programmes pour répondre à l'urgence et bâtir l'avenir"
-        subtitle="Chaque programme est conçu avec les communautés, mis en œuvre par des équipes locales et évalué selon des indicateurs mesurables."
+        title="Des programmes intégrés pour répondre à l'urgence et bâtir l'avenir"
+        subtitle="PI ONG développe des programmes répondant aux besoins humanitaires immédiats tout en renforçant la résilience des communautés."
+
         image={media.plantation}
       />
 
