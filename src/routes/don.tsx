@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
-import { donationTiers, media, paymentMethods } from "@/lib/site-data";
+import { donationAmounts, donationTiers, media, paymentMethods } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/don")({
@@ -28,12 +28,9 @@ export const Route = createFileRoute("/don")({
 
 const amounts = donationAmounts;
 
-export default function DonPage() {
+function Don() {
   const [amount, setAmount] = useState("45");
 
-
-function Don() {
-  const [amount, setAmount] = useState("60");
   const [custom, setCustom] = useState("");
   const [frequency, setFrequency] = useState<"unique" | "mensuel">("unique");
 
