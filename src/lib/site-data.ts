@@ -25,10 +25,12 @@ export const org = {
   short: "PI",
   devise: "Pitié – Humanité – Entraide",
   since: 2023,
-  email: "contact@pitie-internationale.org",
-  phone: "+243 000 000 000",
-  whatsapp: "243000000000",
+  email: "pitieinternationalrdc@gmail.com",
+  phone: "+243 810 262 600",
+  phoneAlt: "+243 977 535 252",
+  whatsapp: "243810262600",
   address: "Goma, Nord-Kivu, République Démocratique du Congo",
+
   socials: [
     { label: "Facebook", href: "https://facebook.com" },
     { label: "Instagram", href: "https://instagram.com" },
