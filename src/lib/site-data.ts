@@ -53,21 +53,75 @@ export const navigation = [
 ] as const;
 
 export const valeurs = [
-  { title: "Dévouement", text: "Un engagement total au service des communautés les plus vulnérables." },
-  { title: "Innovation", text: "Des solutions nouvelles, adaptées aux réalités locales et durables." },
-  { title: "Inclusion", text: "Personne n'est laissé de côté : femmes, jeunes, personnes handicapées." },
-  { title: "Redevabilité", text: "Rendre compte aux communautés, aux partenaires et aux bailleurs." },
-  { title: "Intégrité", text: "Transparence, éthique et rigueur dans chaque action menée." },
-  { title: "Respect", text: "Respect de la dignité, de la culture et des choix des personnes." },
-  { title: "Créativité", text: "Imaginer des réponses agiles face à des crises complexes." },
+  {
+    title: "Dévouement",
+    text: "Nous sommes déterminés à nous identifier par la mission de PI et à mettre le groupe cible au centre de toutes nos actions.",
+  },
+  {
+    title: "Novateur",
+    text: "Nous sommes créatifs et ouverts aux nouvelles solutions. Nous plaidons pour les meilleures solutions en faveur de notre groupe cible.",
+  },
+  {
+    title: "Inclusif",
+    text: "Nous impliquons tout le monde et à tous les niveaux, en nous basant sur le respect mutuel.",
+  },
+  {
+    title: "Fiable / redevable",
+    text: "Nous sommes responsables, loyaux vis-à-vis de l'organisation, intègres dans nos tâches comme dans nos communications.",
+  },
+];
+
+export const groupesCibles = [
+  "Les personnes déplacées internes et réfugiées",
+  "Les communautés hôtes",
+  "Les retournés",
+  "Les femmes et les filles",
+  "Les jeunes",
+  "Les enfants",
+  "Les personnes vivant avec un handicap",
+  "Les survivantes de violences basées sur le genre",
+  "Les petits producteurs agricoles",
+  "Les personnes affectées par l'insécurité humaine sous toutes ses formes",
+];
+
+export const axesProgrammatiques = [
+  {
+    title: "Répondre à l'urgence",
+    text: "Répondre aux besoins urgents dans un impératif de protection de la dignité humaine.",
+  },
+  {
+    title: "Accompagner le relèvement",
+    text: "Dans les zones stabilisées, accompagner le relèvement des populations vulnérables tout en renforçant leurs capacités de résilience.",
+  },
+  {
+    title: "Soutenir le développement",
+    text: "En l'absence de services de base fonctionnels, accompagner le développement des populations vulnérables en répondant aux besoins structurels tout en renforçant leur environnement.",
+  },
+  {
+    title: "Adapter au climat",
+    text: "Aider les agriculteurs à s'adapter au changement climatique en améliorant l'accès à l'eau, en promouvant une agriculture intelligente face au climat et en introduisant des cultures tolérantes à la sécheresse et aux maladies.",
+  },
 ];
 
 export const principes = [
-  { title: "Humanité", text: "Prévenir et alléger les souffrances humaines, où qu'elles se trouvent." },
-  { title: "Neutralité", text: "Ne prendre part à aucune hostilité ni controverse politique ou religieuse." },
-  { title: "Impartialité", text: "Agir selon les seuls besoins, sans discrimination d'aucune sorte." },
-  { title: "Indépendance", text: "Une autonomie d'action vis-à-vis de tout agenda politique ou économique." },
+  {
+    title: "Humanité",
+    text: "Il faut alléger les souffrances humaines où qu'elles soient. L'objectif de l'action humanitaire est de protéger la vie et la santé et de garantir le respect des êtres humains.",
+  },
+  {
+    title: "Neutralité",
+    text: "PI ne prend pas parti pendant les hostilités et ne se lance pas dans des polémiques de nature politique, raciale, religieuse ou idéologique.",
+  },
+  {
+    title: "Impartialité",
+    text: "L'action de PI est menée uniquement sur la base des besoins, sans faire de distinction entre nationalités, races, genres, religions ou opinions politiques.",
+  },
+  {
+    title: "Indépendance",
+    text: "L'action de PI est indépendante de toute visée politique, économique, militaire ou autre dans les zones où elle est mise en œuvre.",
+  },
 ];
+
 
 export const timeline = [
   { year: "2023", title: "Naissance de Pitié Internationale", text: "Création de l'organisation à Goma, en réponse aux crises humanitaires de l'Est de la RDC." },
