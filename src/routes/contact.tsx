@@ -83,8 +83,14 @@ function Contact() {
                   <MapPin className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {org.address}
                 </li>
                 <li className="flex gap-3">
-                  <Phone className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {org.phone}
+                  <Phone className="mt-0.5 size-5 shrink-0 text-humanitarian" />
+                  <span>
+                    <a href={`tel:${org.phone.replace(/\s/g, "")}`} className="hover:underline">{org.phone}</a>
+                    {" / "}
+                    <a href={`tel:${org.phoneAlt.replace(/\s/g, "")}`} className="hover:underline">{org.phoneAlt}</a>
+                  </span>
                 </li>
+
                 <li className="flex gap-3">
                   <Mail className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {org.email}
                 </li>

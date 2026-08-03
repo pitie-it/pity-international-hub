@@ -58,9 +58,12 @@ function Home() {
               Ensemble pour sauver des vies et restaurer la dignité humaine
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-              Depuis 2023, Pitié Internationale accompagne les populations affectées par les crises humanitaires en
-              République Démocratique du Congo grâce à des solutions durables, inclusives et innovantes.
+              Chez Pitié Internationale, nous croyons que chaque vie compte et que chaque personne mérite de vivre dans
+              la sécurité, la dignité et l'espoir. Aux côtés des communautés les plus vulnérables, nous transformons la
+              solidarité en actions concrètes pour répondre aux urgences humanitaires, renforcer la résilience des
+              populations et promouvoir un développement durable et inclusif.
             </p>
+
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-action text-action-foreground hover:bg-action/90">
                 <Link to="/programmes">
@@ -130,13 +133,14 @@ function Home() {
         <div className="container-page">
           <SectionHeading
             eyebrow="Nos programmes"
-            title="Douze domaines d'intervention complémentaires"
-            subtitle="De l'urgence humanitaire au développement durable, nos programmes répondent aux besoins réels des communautés."
+            title="Cinq programmes intégrés au service des communautés"
+            subtitle="PI ONG développe des programmes répondant aux besoins humanitaires immédiats tout en renforçant la résilience des communautés."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {programmes.slice(0, 6).map((p, i) => {
+            {programmes.map((p, i) => {
               const Icon = pillarIcons[i % pillarIcons.length]!;
               return (
+
                 <Reveal key={p.slug} delay={i * 0.06}>
                   <Link to="/programmes/$slug" params={{ slug: p.slug }} className="card-surface group block h-full overflow-hidden">
                     <div className="relative h-44 overflow-hidden">
@@ -164,7 +168,7 @@ function Home() {
           </div>
           <div className="mt-12 text-center">
             <Button asChild size="lg" variant="outline">
-              <Link to="/programmes">Voir les 12 programmes</Link>
+              <Link to="/programmes">Voir tous nos programmes</Link>
             </Button>
           </div>
         </div>

@@ -115,11 +115,14 @@ function ProgrammeDetail() {
           </div>
 
           <aside className="space-y-6">
-            <Reveal className="card-surface p-7">
-              <Quote className="size-8 text-action" />
-              <p className="mt-4 italic leading-relaxed">« {programme.temoignage.quote} »</p>
-              <p className="mt-4 text-sm font-semibold text-muted-foreground">— {programme.temoignage.author}</p>
-            </Reveal>
+            {programme.temoignage && (
+              <Reveal className="card-surface p-7">
+                <Quote className="size-8 text-action" />
+                <p className="mt-4 italic leading-relaxed">« {programme.temoignage.quote} »</p>
+                <p className="mt-4 text-sm font-semibold text-muted-foreground">— {programme.temoignage.author}</p>
+              </Reveal>
+            )}
+
             <Reveal delay={0.1} className="rounded-2xl gradient-brand p-7 text-primary-foreground">
               <h3 className="font-display text-lg font-bold">Soutenir ce programme</h3>
               <p className="mt-2 text-sm opacity-90">
