@@ -1,4 +1,6 @@
 import logo from "@/assets/LOGO_PI_OK.jpg.asset.json";
+import logoHorizontal from "@/assets/logo-pi-horizontal.png.asset.json";
+
 import photoSuivi from "@/assets/IDEM_SUIVI.jpeg.asset.json";
 import photoGrain from "@/assets/IMG-20200512-WA0054.jpg.asset.json";
 import photoRecolte from "@/assets/IMG-20220422-WA0015.jpg.asset.json";
