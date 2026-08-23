@@ -177,6 +177,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-align: justify;
   }
 
   h1,
@@ -185,6 +186,7 @@
   h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+    text-align: center;
   }
 
   html {

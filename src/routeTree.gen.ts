@@ -13,10 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as AgirRouteImport } from './routes/agir'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DonRouteImport } from './routes/don'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as ImpactRouteImport } from './routes/impact'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
 import { Route as PartenairesRouteImport } from './routes/partenaires'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes/index'
@@ -42,6 +44,11 @@ const AgirRoute = AgirRouteImport.update({
   path: '/agir',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -60,6 +67,11 @@ const GalerieRoute = GalerieRouteImport.update({
 const ImpactRoute = ImpactRouteImport.update({
   id: '/impact',
   path: '/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OuNousTravaillonsRoute = OuNousTravaillonsRouteImport.update({
@@ -88,10 +100,12 @@ export interface FileRoutesByFullPath {
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -102,10 +116,12 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -117,10 +133,12 @@ export interface FileRoutesById {
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
@@ -133,10 +151,12 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/confidentialite'
     | '/contact'
     | '/don'
     | '/galerie'
     | '/impact'
+    | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
     | '/programmes/$slug'
@@ -147,10 +167,12 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/confidentialite'
     | '/contact'
     | '/don'
     | '/galerie'
     | '/impact'
+    | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
     | '/programmes/$slug'
@@ -161,10 +183,12 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/confidentialite'
     | '/contact'
     | '/don'
     | '/galerie'
     | '/impact'
+    | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
     | '/programmes/$slug'
@@ -176,10 +200,12 @@ export interface RootRouteChildren {
   AProposRoute: typeof AProposRoute
   ActualitesRoute: typeof ActualitesRoute
   AgirRoute: typeof AgirRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
   DonRoute: typeof DonRoute
   GalerieRoute: typeof GalerieRoute
   ImpactRoute: typeof ImpactRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   OuNousTravaillonsRoute: typeof OuNousTravaillonsRoute
   PartenairesRoute: typeof PartenairesRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
@@ -216,6 +242,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -242,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/impact'
       fullPath: '/impact'
       preLoaderRoute: typeof ImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ou-nous-travaillons': {
@@ -280,10 +320,12 @@ const rootRouteChildren: RootRouteChildren = {
   AProposRoute: AProposRoute,
   ActualitesRoute: ActualitesRoute,
   AgirRoute: AgirRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
   DonRoute: DonRoute,
   GalerieRoute: GalerieRoute,
   ImpactRoute: ImpactRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   OuNousTravaillonsRoute: OuNousTravaillonsRoute,
   PartenairesRoute: PartenairesRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
@@ -292,3 +334,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
