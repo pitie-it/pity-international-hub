@@ -48,6 +48,7 @@ export const navigation = [
   { label: "Passez à l'action", to: "/agir" },
   { label: "Nos Partenaires", to: "/partenaires" },
   { label: "Actualités", to: "/actualites" },
+  { label: "Emploi", to: "/emploi" },
   { label: "Galerie", to: "/galerie" },
   { label: "Contact", to: "/contact" },
 ] as const;
