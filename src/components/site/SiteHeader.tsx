@@ -122,25 +122,33 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3">
-        <Link to="/" className="flex min-w-0 items-center gap-3">
+      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3.5">
+        <Link to="/" aria-label="Pitié Internationale — Accueil" className="flex min-w-0 items-center gap-3.5">
           <img
-            src={media.logoHorizontal}
-            alt="Logo Pitié Internationale — Pitié, Humanité, Entraide"
-            className="h-11 w-auto max-w-[240px] shrink-0 object-contain sm:h-12 sm:max-w-[300px]"
+            src={media.logo}
+            alt="Emblème de Pitié Internationale"
+            className="size-11 shrink-0 rounded-full object-contain sm:size-14"
           />
+          <span className="min-w-0 border-l border-border pl-3.5">
+            <span className="block whitespace-nowrap font-display text-xs font-extrabold uppercase text-primary sm:text-lg">
+              Pitié Internationale
+            </span>
+            <span className="mt-0.5 hidden text-[0.65rem] font-semibold uppercase text-muted-foreground sm:block">
+              Pitié · Humanité · Entraide
+            </span>
+          </span>
         </Link>
 
 
         <div className="flex items-center gap-1">
-          <nav className="hidden items-center gap-0.5 xl:flex">
+          <nav className="hidden items-center gap-0.5 2xl:flex">
             {navigation.slice(0, 7).map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground",
-                  pathname === item.to && "bg-accent text-accent-foreground",
+                  "border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:text-primary",
+                  pathname === item.to && "border-primary text-primary",
                 )}
               >
                 {item.label}
@@ -148,17 +156,17 @@ export function SiteHeader() {
             ))}
           </nav>
           <GlobalSearch />
-          <Button variant="ghost" size="icon" aria-label="Basculer le thème" onClick={toggle}>
+          <Button variant="ghost" size="icon" aria-label="Basculer le thème" onClick={toggle} className="hidden sm:inline-flex">
             {dark ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </Button>
-          <Button asChild className="hidden bg-action text-action-foreground hover:bg-action/90 sm:inline-flex">
+          <Button asChild className="hidden rounded-md bg-action text-action-foreground hover:bg-action/90 sm:inline-flex">
             <Link to="/don">
               <Heart className="size-4" /> Faire un don
             </Link>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="Ouvrir le menu" className="xl:hidden">
+              <Button variant="outline" size="icon" aria-label="Ouvrir le menu" className="2xl:hidden">
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
