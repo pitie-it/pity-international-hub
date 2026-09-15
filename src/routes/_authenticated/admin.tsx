@@ -127,7 +127,7 @@ function AdminPage() {
         <TabsContent value="settings" className="mt-8">
           {content.settings && <div className="card-surface grid gap-5 p-6 sm:grid-cols-2">{[
             ["email", "Adresse e-mail"], ["phone", "Téléphone principal"], ["phone_alt", "Deuxième téléphone"], ["whatsapp", "Numéro WhatsApp"], ["address", "Adresse"], ["devise", "Devise"], ["facebook", "Facebook"], ["instagram", "Instagram"], ["linkedin", "LinkedIn"], ["youtube", "YouTube"],
-          ].map(([key, label]) => <div key={key} className={`grid gap-2 ${key === "address" || key === "devise" ? "sm:col-span-2" : ""}`}><Label>{label}</Label><Input value={String(content.settings?.[key as keyof typeof content.settings] ?? "")} onChange={(e) => setSetting(key, e.target.value)} /></div>)}<div className="sm:col-span-2"><Button disabled={busy} onClick={() => run(() => saveSettings({ data: content.settings ?? {} }), "Coordonnées enregistrées")}><Save className="size-4" /> Enregistrer les coordonnées</Button></div></div>}
+          ].map(([key = "", label = ""]) => <div key={key} className={`grid gap-2 ${key === "address" || key === "devise" ? "sm:col-span-2" : ""}`}><Label>{label}</Label><Input value={String(content.settings?.[key as keyof typeof content.settings] ?? "")} onChange={(e) => setSetting(key, e.target.value)} /></div>)}<div className="sm:col-span-2"><Button disabled={busy} onClick={() => run(() => saveSettings({ data: content.settings ?? {} }), "Coordonnées enregistrées")}><Save className="size-4" /> Enregistrer les coordonnées</Button></div></div>}
         </TabsContent>
       </Tabs>
     </section>
