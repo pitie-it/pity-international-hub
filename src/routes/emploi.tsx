@@ -23,8 +23,11 @@ import {
 } from "@/components/ui/accordion";
 import { PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
 import { jobOffers, media, org } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { contactInfo, jobsOf, siteContentQuery, textOf } from "@/lib/content";
 
 export const Route = createFileRoute("/emploi")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery),
   component: Emploi,
   head: () => ({
     meta: [
@@ -60,6 +63,9 @@ const applicationSchema = z.object({
 });
 
 function Emploi() {
+  const { data } = useSuspenseQuery(siteContentQuery);
+  const jobs = jobsOf(data);
+  const info = contactInfo(data);
   const [poste, setPoste] = useState("");
   const [sending, setSending] = useState(false);
 
@@ -92,8 +98,8 @@ function Emploi() {
     <>
       <PageHero
         eyebrow="Carrières"
-        title="Rejoignez nos équipes sur le terrain"
-        subtitle="Pitié Internationale recrute des professionnels engagés pour servir les communautés du Nord-Kivu, du Sud-Kivu et de l'Ituri. Postulez en ligne, en quelques minutes."
+        title={textOf(data.texts, "emploi.hero_title", "Rejoignez nos équipes sur le terrain")}
+        subtitle={textOf(data.texts, "emploi.hero_text", "Pitié Internationale recrute des professionnels engagés pour servir les communautés du Nord-Kivu, du Sud-Kivu et de l'Ituri.")}
         image={media.suivi}
       />
 
@@ -105,7 +111,7 @@ function Emploi() {
           subtitle="Toutes nos offres sont ouvertes de manière équitable : PI ONG applique une politique de tolérance zéro face à toute forme de discrimination, d'exploitation et d'abus."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {jobOffers.map((job, i) => (
+           {jobs.map((job, i) => (
             <Reveal key={job.slug} delay={i * 0.06}>
               <article className="card-surface flex h-full flex-col p-7">
                 <div className="flex flex-wrap items-center gap-2">
@@ -193,7 +199,7 @@ function Emploi() {
                     <SelectValue placeholder="Choisissez une offre" />
                   </SelectTrigger>
                   <SelectContent>
-                    {jobOffers.map((j) => (
+                     {jobs.map((j) => (
                       <SelectItem key={j.slug} value={j.title}>
                         {j.title}
                       </SelectItem>
@@ -232,8 +238,8 @@ function Emploi() {
             </form>
             <p className="mt-6 text-center text-sm text-muted-foreground">
               Une question sur le recrutement ? Écrivez-nous à{" "}
-              <a className="font-semibold text-primary hover:underline" href={`mailto:${org.email}`}>
-                {org.email}
+               <a className="font-semibold text-primary hover:underline" href={`mailto:${info.email}`}>
+                 {info.email}
               </a>
             </p>
           </Reveal>
