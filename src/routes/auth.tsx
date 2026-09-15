@@ -25,7 +25,7 @@ function AuthPage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "create">("login");
   const [busy, setBusy] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("pitieinternationalrdc@gmail.com");
   const [password, setPassword] = useState("");
 
   async function submit(e: React.FormEvent) {
@@ -56,7 +56,7 @@ function AuthPage() {
         <h1 className="mt-3 text-2xl font-bold">{mode === "login" ? "Espace administrateur" : "Créer le compte administrateur"}</h1>
         <p className="mt-2 text-center text-sm text-muted-foreground">{mode === "login" ? "Connectez-vous pour modifier le contenu du site." : "Le premier compte créé deviendra l'administrateur du site."}</p>
         <form onSubmit={submit} className="mt-7 grid gap-5 text-left">
-          <div className="grid gap-2"><Label htmlFor="admin-email">Adresse e-mail</Label><Input id="admin-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></div>
+          <div className="grid gap-2"><Label htmlFor="admin-email">Adresse e-mail</Label><Input id="admin-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} readOnly required /></div>
           <div className="grid gap-2"><Label htmlFor="admin-password">Mot de passe</Label><Input id="admin-password" type="password" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
           <Button type="submit" disabled={busy}>{busy ? "Veuillez patienter…" : mode === "login" ? "Se connecter" : "Créer le compte"}</Button>
         </form>

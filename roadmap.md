@@ -1,3 +1,3 @@
-- [ ] Terminer l'espace d'administration (connexion, textes, témoignages, emplois, coordonnées)
-- [ ] Alléger la page d'accueil et garder uniquement les sections essentielles
-- [ ] Vérifier l'affichage et le fonctionnement
+- [x] Terminer l'espace d'administration (connexion, textes, témoignages, emplois, coordonnées)
+- [x] Alléger la page d'accueil et garder uniquement les sections essentielles
+- [x] Vérifier l'affichage et le fonctionnement

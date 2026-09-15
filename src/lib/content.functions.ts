@@ -76,6 +76,10 @@ export const getAdminContent = createServerFn({ method: "GET" })
 export const claimAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { data: identity } = await context.supabase.auth.getUser();
+    if (identity.user?.email?.toLowerCase() !== "pitieinternationalrdc@gmail.com") {
+      throw new Error("Cette adresse e-mail n'est pas autorisée à administrer le site");
+    }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { count } = await supabaseAdmin
       .from("user_roles")
