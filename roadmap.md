@@ -1,0 +1,3 @@
+- [ ] Terminer l'espace d'administration (connexion, textes, témoignages, emplois, coordonnées)
+- [ ] Alléger la page d'accueil et garder uniquement les sections essentielles
+- [ ] Vérifier l'affichage et le fonctionnement
