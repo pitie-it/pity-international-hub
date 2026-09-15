@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { navigation, org, media, programmes, articles } from "@/lib/site-data";
+import { navigation, media, programmes, articles } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { contactInfo, siteContentQuery } from "@/lib/content";

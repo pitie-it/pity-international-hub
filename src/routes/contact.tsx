@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { media, org } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { contactInfo, siteContentQuery, textOf } from "@/lib/content";
 

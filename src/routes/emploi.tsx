@@ -22,7 +22,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
-import { jobOffers, media, org } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { contactInfo, jobsOf, siteContentQuery, textOf } from "@/lib/content";
 
