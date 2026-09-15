@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { navigation, org, media } from "@/lib/site-data";
+import { useQuery } from "@tanstack/react-query";
+import { contactInfo, siteContentQuery } from "@/lib/content";
 
 export function SiteFooter() {
+  const { data } = useQuery(siteContentQuery);
+  const info = contactInfo(data);
   return (
     <footer className="mt-24 border-t bg-secondary/50">
       <div className="container-page grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
@@ -14,7 +18,7 @@ export function SiteFooter() {
             <img src={media.logo} alt="Logo Pitié Internationale" className="size-12 rounded-full object-contain" />
             <div className="min-w-0">
               <p className="font-display font-bold">Pitié Internationale</p>
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">{org.devise}</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">{info.devise}</p>
             </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -40,17 +44,17 @@ export function SiteFooter() {
           <h3 className="text-sm font-bold uppercase tracking-widest">Coordonnées</h3>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex gap-2">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {org.address}
+               <MapPin className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {info.address}
             </li>
             <li className="flex gap-2">
-              <Phone className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {org.phone}
+               <Phone className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {info.phone}
             </li>
             <li className="flex gap-2">
-              <Mail className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {org.email}
+               <Mail className="mt-0.5 size-4 shrink-0 text-humanitarian" /> {info.email}
             </li>
           </ul>
           <div className="mt-4 flex flex-wrap gap-2">
-            {org.socials.map((s) => (
+            {info.socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}

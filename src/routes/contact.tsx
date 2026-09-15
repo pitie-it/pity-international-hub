@@ -6,9 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { media, org } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { contactInfo, siteContentQuery, textOf } from "@/lib/content";
 
 export const Route = createFileRoute("/contact")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery),
   component: Contact,
   head: () => ({
     meta: [
@@ -26,12 +29,14 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
+  const { data } = useSuspenseQuery(siteContentQuery);
+  const info = contactInfo(data);
   return (
     <>
       <PageHero
         eyebrow="Contact"
-        title="Parlons de ce que nous pouvons construire ensemble"
-        subtitle="Partenaires, bailleurs, volontaires, journalistes ou communautés : nos équipes sont à votre écoute."
+        title={textOf(data.texts, "contact.hero_title", "Parlons de ce que nous pouvons construire ensemble")}
+        subtitle={textOf(data.texts, "contact.hero_text", "Partenaires, bailleurs, volontaires, journalistes ou communautés : nos équipes sont à votre écoute.")}
         image={media.suivi}
       />
 
@@ -80,29 +85,29 @@ function Contact() {
               <h2 className="font-display text-xl font-bold">Nos coordonnées</h2>
               <ul className="mt-5 space-y-4 text-sm">
                 <li className="flex gap-3">
-                  <MapPin className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {org.address}
+                   <MapPin className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {info.address}
                 </li>
                 <li className="flex gap-3">
                   <Phone className="mt-0.5 size-5 shrink-0 text-humanitarian" />
                   <span>
-                    <a href={`tel:${org.phone.replace(/\s/g, "")}`} className="hover:underline">{org.phone}</a>
+                     <a href={`tel:${info.phone.replace(/\s/g, "")}`} className="hover:underline">{info.phone}</a>
                     {" / "}
-                    <a href={`tel:${org.phoneAlt.replace(/\s/g, "")}`} className="hover:underline">{org.phoneAlt}</a>
+                     <a href={`tel:${info.phoneAlt.replace(/\s/g, "")}`} className="hover:underline">{info.phoneAlt}</a>
                   </span>
                 </li>
 
                 <li className="flex gap-3">
-                  <Mail className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {org.email}
+                   <Mail className="mt-0.5 size-5 shrink-0 text-humanitarian" /> {info.email}
                 </li>
                 <li className="flex gap-3">
                   <MessageCircle className="mt-0.5 size-5 shrink-0 text-humanitarian" />
-                  <a href={`https://wa.me/${org.whatsapp}`} className="underline-offset-4 hover:underline">
+                   <a href={`https://wa.me/${info.whatsapp}`} className="underline-offset-4 hover:underline">
                     Discuter sur WhatsApp
                   </a>
                 </li>
               </ul>
               <div className="mt-5 flex flex-wrap gap-2">
-                {org.socials.map((s) => (
+                 {info.socials.map((s) => (
                   <a
                     key={s.label}
                     href={s.href}

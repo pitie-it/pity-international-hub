@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { navigation, org, media, programmes, articles } from "@/lib/site-data";
+import { navigation, media, programmes, articles } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { contactInfo, siteContentQuery } from "@/lib/content";
 
 function useTheme() {
   const [dark, setDark] = useState(false);
@@ -88,6 +90,8 @@ function GlobalSearch() {
 }
 
 export function SiteHeader() {
+  const { data } = useQuery(siteContentQuery);
+  const info = contactInfo(data);
   const { dark, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -109,10 +113,10 @@ export function SiteHeader() {
     >
       <div className="hidden bg-primary text-primary-foreground lg:block">
         <div className="container-page flex items-center justify-between py-1.5 text-xs">
-          <p className="font-semibold tracking-wide">{org.devise}</p>
+          <p className="font-semibold tracking-wide">{info.devise}</p>
           <div className="flex items-center gap-4">
-            <a href={`mailto:${org.email}`} className="hover:underline">
-              {org.email}
+            <a href={`mailto:${info.email}`} className="hover:underline">
+              {info.email}
             </a>
             <span className="opacity-60">|</span>
             <span className="inline-flex items-center gap-1">

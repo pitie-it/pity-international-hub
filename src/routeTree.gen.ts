@@ -10,9 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as AgirRouteImport } from './routes/agir'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DonRouteImport } from './routes/don'
@@ -22,12 +24,17 @@ import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as OuNousTravaillonsRouteImport } from './routes/ou-nous-travaillons'
 import { Route as PartenairesRouteImport } from './routes/partenaires'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes/index'
 import { Route as ProgrammesSlugRouteImport } from './routes/programmes/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AProposRoute = AProposRouteImport.update({
@@ -43,6 +50,11 @@ const ActualitesRoute = ActualitesRouteImport.update({
 const AgirRoute = AgirRouteImport.update({
   id: '/agir',
   path: '/agir',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
@@ -90,6 +102,11 @@ const PartenairesRoute = PartenairesRouteImport.update({
   path: '/partenaires',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
   id: '/programmes/',
   path: '/programmes/',
@@ -106,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
@@ -115,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
@@ -123,6 +142,7 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
@@ -132,15 +152,18 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/a-propos': typeof AProposRoute
   '/actualites': typeof ActualitesRoute
   '/agir': typeof AgirRoute
+  '/auth': typeof AuthRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
@@ -150,6 +173,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/ou-nous-travaillons': typeof OuNousTravaillonsRoute
   '/partenaires': typeof PartenairesRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
@@ -160,6 +184,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/don'
@@ -169,6 +194,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
+    | '/admin'
     | '/programmes/$slug'
     | '/programmes/'
   fileRoutesByTo: FileRoutesByTo
@@ -177,6 +203,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/don'
@@ -186,14 +213,17 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
+    | '/admin'
     | '/programmes/$slug'
     | '/programmes'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/a-propos'
     | '/actualites'
     | '/agir'
+    | '/auth'
     | '/confidentialite'
     | '/contact'
     | '/don'
@@ -203,15 +233,18 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/ou-nous-travaillons'
     | '/partenaires'
+    | '/_authenticated/admin'
     | '/programmes/$slug'
     | '/programmes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AProposRoute: typeof AProposRoute
   ActualitesRoute: typeof ActualitesRoute
   AgirRoute: typeof AgirRoute
+  AuthRoute: typeof AuthRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
   DonRoute: typeof DonRoute
@@ -234,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/a-propos': {
       id: '/a-propos'
       path: '/a-propos'
@@ -253,6 +293,13 @@ declare module '@tanstack/react-router' {
       path: '/agir'
       fullPath: '/agir'
       preLoaderRoute: typeof AgirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confidentialite': {
@@ -318,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartenairesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/programmes/': {
       id: '/programmes/'
       path: '/programmes'
@@ -335,11 +389,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AProposRoute: AProposRoute,
   ActualitesRoute: ActualitesRoute,
   AgirRoute: AgirRoute,
+  AuthRoute: AuthRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
   DonRoute: DonRoute,
