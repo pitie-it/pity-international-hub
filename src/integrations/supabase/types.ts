@@ -65,6 +65,144 @@ export type Database = {
         }
         Relationships: []
       }
+      news_articles: {
+        Row: {
+          category: string
+          created_at: string
+          excerpt: string
+          id: string
+          image_key: string
+          published: boolean
+          published_on: string
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          image_key?: string
+          published?: boolean
+          published_on?: string
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          image_key?: string
+          published?: boolean
+          published_on?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      programmes: {
+        Row: {
+          activites: string[]
+          created_at: string
+          id: string
+          image_key: string
+          objectifs: string[]
+          presentation: string
+          published: boolean
+          resultats: string[]
+          slug: string
+          sort_order: number
+          tagline: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          activites?: string[]
+          created_at?: string
+          id?: string
+          image_key?: string
+          objectifs?: string[]
+          presentation?: string
+          published?: boolean
+          resultats?: string[]
+          slug: string
+          sort_order?: number
+          tagline?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          activites?: string[]
+          created_at?: string
+          id?: string
+          image_key?: string
+          objectifs?: string[]
+          presentation?: string
+          published?: boolean
+          resultats?: string[]
+          slug?: string
+          sort_order?: number
+          tagline?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      provinces: {
+        Row: {
+          beneficiaires: string
+          chef_lieu: string
+          created_at: string
+          description: string
+          id: string
+          map_x: number
+          map_y: number
+          name: string
+          programmes: string[]
+          published: boolean
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          beneficiaires?: string
+          chef_lieu?: string
+          created_at?: string
+          description?: string
+          id?: string
+          map_x?: number
+          map_y?: number
+          name: string
+          programmes?: string[]
+          published?: boolean
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          beneficiaires?: string
+          chef_lieu?: string
+          created_at?: string
+          description?: string
+          id?: string
+          map_x?: number
+          map_y?: number
+          name?: string
+          programmes?: string[]
+          published?: boolean
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           address: string
