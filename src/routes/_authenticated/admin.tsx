@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Briefcase, FileText, LogOut, MapPin, MessageSquareQuote, Plus, Save, Trash2 } from "lucide-react";
+import { FileText, LogOut, MapPin, MessageSquareQuote, Save, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  deleteJob, deleteTestimonial, getAdminContent, isAdmin, saveJob, saveSettings,
-  saveTestimonial, saveTexts, type JobInput, type SiteContent, type TestimonialInput,
+  deleteTestimonial, getAdminContent, isAdmin, saveSettings,
+  saveTestimonial, saveTexts, type SiteContent, type TestimonialInput,
 } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -28,7 +28,6 @@ export const Route = createFileRoute("/_authenticated/admin")({
 });
 
 const emptyTestimonial: TestimonialInput = { quote: "", author: "", role_label: "", sort_order: 0, published: true };
-const emptyJob: JobInput = { slug: "", title: "", type: "CDD", lieu: "", departement: "", deadline: "", resume: "", missions: [], profil: [], published: true, sort_order: 0 };
 
 function AdminPage() {
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ function AdminPage() {
   const [denied, setDenied] = useState(false);
   const [busy, setBusy] = useState(false);
   const [testimonial, setTestimonial] = useState<TestimonialInput>(emptyTestimonial);
-  const [job, setJob] = useState<JobInput>(emptyJob);
 
   async function load() {
     try {
@@ -74,10 +72,9 @@ function AdminPage() {
       </div>
 
       <Tabs defaultValue="texts" className="mt-8">
-        <TabsList className="grid h-auto w-full grid-cols-2 gap-1 sm:grid-cols-4">
+        <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-3">
           <TabsTrigger value="texts"><FileText className="size-4" /> Textes</TabsTrigger>
           <TabsTrigger value="testimonials"><MessageSquareQuote className="size-4" /> Témoignages</TabsTrigger>
-          <TabsTrigger value="jobs"><Briefcase className="size-4" /> Emplois</TabsTrigger>
           <TabsTrigger value="settings"><MapPin className="size-4" /> Coordonnées</TabsTrigger>
         </TabsList>
 
@@ -104,24 +101,6 @@ function AdminPage() {
             </form>
             <div className="grid gap-3">{content.testimonials.map((t) => <article key={t.id} className="card-surface p-5"><blockquote className="text-sm">« {t.quote} »</blockquote><p className="mt-3 font-semibold">{t.author}</p><p className="text-xs text-muted-foreground">{t.role_label} · {t.published ? "Publié" : "Masqué"}</p><div className="mt-4 flex gap-2"><Button size="sm" variant="outline" onClick={() => setTestimonial({ id: t.id, quote: t.quote, author: t.author, role_label: t.role_label, sort_order: t.sort_order, published: t.published })}>Modifier</Button><Button size="icon" variant="destructive" aria-label="Supprimer" onClick={() => run(() => deleteTestimonial({ data: { id: t.id } }), "Témoignage supprimé")}><Trash2 className="size-4" /></Button></div></article>)}</div>
           </div>
-        </TabsContent>
-
-        <TabsContent value="jobs" className="mt-8">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-            <form className="card-surface grid gap-4 p-6" onSubmit={(e) => { e.preventDefault(); void run(() => saveJob({ data: job }), "Offre enregistrée").then(() => setJob(emptyJob)); }}>
-              <h2 className="text-xl font-bold">{job.id ? "Modifier" : "Ajouter"} une offre</h2>
-              <div className="grid gap-2"><Label>Titre du poste</Label><Input required value={job.title} onChange={(e) => setJob({ ...job, title: e.target.value, slug: job.slug || e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") })} /></div>
-              <div className="grid gap-4 sm:grid-cols-2"><div className="grid gap-2"><Label>Type</Label><Input value={job.type} onChange={(e) => setJob({ ...job, type: e.target.value })} /></div><div className="grid gap-2"><Label>Département</Label><Input value={job.departement} onChange={(e) => setJob({ ...job, departement: e.target.value })} /></div></div>
-              <div className="grid gap-4 sm:grid-cols-2"><div className="grid gap-2"><Label>Lieu</Label><Input value={job.lieu} onChange={(e) => setJob({ ...job, lieu: e.target.value })} /></div><div className="grid gap-2"><Label>Date limite</Label><Input value={job.deadline} onChange={(e) => setJob({ ...job, deadline: e.target.value })} /></div></div>
-              <div className="grid gap-2"><Label>Résumé</Label><Textarea required rows={3} value={job.resume} onChange={(e) => setJob({ ...job, resume: e.target.value })} /></div>
-              <div className="grid gap-2"><Label>Missions (une par ligne)</Label><Textarea rows={5} value={job.missions.join("\n")} onChange={(e) => setJob({ ...job, missions: e.target.value.split("\n").filter(Boolean) })} /></div>
-              <div className="grid gap-2"><Label>Profil (un élément par ligne)</Label><Textarea rows={5} value={job.profil.join("\n")} onChange={(e) => setJob({ ...job, profil: e.target.value.split("\n").filter(Boolean) })} /></div>
-              <div className="flex items-center gap-3"><Switch checked={job.published} onCheckedChange={(v) => setJob({ ...job, published: v })} /><Label>Offre publiée</Label></div>
-              <div className="flex gap-2"><Button type="submit" disabled={busy}><Save className="size-4" /> Enregistrer</Button>{job.id && <Button type="button" variant="outline" onClick={() => setJob(emptyJob)}>Annuler</Button>}</div>
-            </form>
-            <div className="grid gap-3">{content.jobs.map((j) => <article key={j.id} className="card-surface p-5"><h3 className="font-bold">{j.title}</h3><p className="mt-1 text-sm text-muted-foreground">{j.type} · {j.lieu} · {j.published ? "Publiée" : "Masquée"}</p><div className="mt-4 flex gap-2"><Button size="sm" variant="outline" onClick={() => setJob({ id: j.id, slug: j.slug, title: j.title, type: j.type, lieu: j.lieu, departement: j.departement, deadline: j.deadline, resume: j.resume, missions: j.missions, profil: j.profil, published: j.published, sort_order: j.sort_order })}>Modifier</Button><Button size="icon" variant="destructive" aria-label="Supprimer" onClick={() => run(() => deleteJob({ data: { id: j.id } }), "Offre supprimée")}><Trash2 className="size-4" /></Button></div></article>)}</div>
-          </div>
-          <Button variant="outline" className="mt-5" onClick={() => setJob(emptyJob)}><Plus className="size-4" /> Nouvelle offre</Button>
         </TabsContent>
 
         <TabsContent value="settings" className="mt-8">

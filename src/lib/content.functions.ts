@@ -6,13 +6,11 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 export type SiteSettingsRow = Database["public"]["Tables"]["site_settings"]["Row"];
 export type SiteTextRow = Database["public"]["Tables"]["site_texts"]["Row"];
 export type TestimonialRow = Database["public"]["Tables"]["testimonials"]["Row"];
-export type JobOfferRow = Database["public"]["Tables"]["job_offers"]["Row"];
 
 export type SiteContent = {
   settings: SiteSettingsRow | null;
   texts: SiteTextRow[];
   testimonials: TestimonialRow[];
-  jobs: JobOfferRow[];
 };
 
 function publicClient() {
@@ -33,17 +31,15 @@ function publicClient() {
 /** Contenus publics du site (lecture anonyme). */
 export const getSiteContent = createServerFn({ method: "GET" }).handler(async (): Promise<SiteContent> => {
   const supabase = publicClient();
-  const [settings, texts, testimonials, jobs] = await Promise.all([
+  const [settings, texts, testimonials] = await Promise.all([
     supabase.from("site_settings").select("*").eq("id", "main").maybeSingle(),
     supabase.from("site_texts").select("*").order("page").order("sort_order"),
     supabase.from("testimonials").select("*").eq("published", true).order("sort_order"),
-    supabase.from("job_offers").select("*").eq("published", true).order("sort_order"),
   ]);
   return {
     settings: settings.data ?? null,
     texts: texts.data ?? [],
     testimonials: testimonials.data ?? [],
-    jobs: jobs.data ?? [],
   };
 });
 
@@ -58,17 +54,15 @@ export const getAdminContent = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<SiteContent> => {
     await assertAdmin(context.supabase, context.userId);
     const supabase = context.supabase;
-    const [settings, texts, testimonials, jobs] = await Promise.all([
+    const [settings, texts, testimonials] = await Promise.all([
       supabase.from("site_settings").select("*").eq("id", "main").maybeSingle(),
       supabase.from("site_texts").select("*").order("page").order("sort_order"),
       supabase.from("testimonials").select("*").order("sort_order"),
-      supabase.from("job_offers").select("*").order("sort_order"),
     ]);
     return {
       settings: settings.data ?? null,
       texts: texts.data ?? [],
       testimonials: testimonials.data ?? [],
-      jobs: jobs.data ?? [],
     };
   });
 
@@ -162,41 +156,3 @@ export const deleteTestimonial = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-export type JobInput = {
-  id?: string;
-  slug: string;
-  title: string;
-  type: string;
-  lieu: string;
-  departement: string;
-  deadline: string;
-  resume: string;
-  missions: string[];
-  profil: string[];
-  published: boolean;
-  sort_order: number;
-};
-
-export const saveJob = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((data: JobInput) => data)
-  .handler(async ({ data, context }) => {
-    await assertAdmin(context.supabase, context.userId);
-    const { id, ...fields } = data;
-    const query = id
-      ? context.supabase.from("job_offers").update(fields).eq("id", id)
-      : context.supabase.from("job_offers").insert(fields);
-    const { error } = await query;
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
-
-export const deleteJob = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((data: { id: string }) => data)
-  .handler(async ({ data, context }) => {
-    await assertAdmin(context.supabase, context.userId);
-    const { error } = await context.supabase.from("job_offers").delete().eq("id", data.id);
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });

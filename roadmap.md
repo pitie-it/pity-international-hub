@@ -1,3 +1,5 @@
-- [x] Terminer l'espace d'administration (connexion, textes, témoignages, emplois, coordonnées)
+- [x] Terminer l'espace d'administration (connexion, textes, témoignages, coordonnées)
 - [x] Alléger la page d'accueil et garder uniquement les sections essentielles
 - [x] Vérifier l'affichage et le fonctionnement
+- [x] Supprimer la rubrique Emploi du site et de l'administration
+- [x] Actualiser automatiquement les contenus publics enregistrés
