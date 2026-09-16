@@ -18,7 +18,6 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DonRouteImport } from './routes/don'
-import { Route as EmploiRouteImport } from './routes/emploi'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
@@ -72,11 +71,6 @@ const DonRoute = DonRouteImport.update({
   path: '/don',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EmploiRoute = EmploiRouteImport.update({
-  id: '/emploi',
-  path: '/emploi',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GalerieRoute = GalerieRouteImport.update({
   id: '/galerie',
   path: '/galerie',
@@ -127,7 +121,6 @@ export interface FileRoutesByFullPath {
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
-  '/emploi': typeof EmploiRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -146,7 +139,6 @@ export interface FileRoutesByTo {
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
-  '/emploi': typeof EmploiRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -167,7 +159,6 @@ export interface FileRoutesById {
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/don': typeof DonRoute
-  '/emploi': typeof EmploiRoute
   '/galerie': typeof GalerieRoute
   '/impact': typeof ImpactRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -188,7 +179,6 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/contact'
     | '/don'
-    | '/emploi'
     | '/galerie'
     | '/impact'
     | '/mentions-legales'
@@ -207,7 +197,6 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/contact'
     | '/don'
-    | '/emploi'
     | '/galerie'
     | '/impact'
     | '/mentions-legales'
@@ -227,7 +216,6 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/contact'
     | '/don'
-    | '/emploi'
     | '/galerie'
     | '/impact'
     | '/mentions-legales'
@@ -248,7 +236,6 @@ export interface RootRouteChildren {
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
   DonRoute: typeof DonRoute
-  EmploiRoute: typeof EmploiRoute
   GalerieRoute: typeof GalerieRoute
   ImpactRoute: typeof ImpactRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
@@ -321,13 +308,6 @@ declare module '@tanstack/react-router' {
       path: '/don'
       fullPath: '/don'
       preLoaderRoute: typeof DonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/emploi': {
-      id: '/emploi'
-      path: '/emploi'
-      fullPath: '/emploi'
-      preLoaderRoute: typeof EmploiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/galerie': {
@@ -410,7 +390,6 @@ const rootRouteChildren: RootRouteChildren = {
   ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
   DonRoute: DonRoute,
-  EmploiRoute: EmploiRoute,
   GalerieRoute: GalerieRoute,
   ImpactRoute: ImpactRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
