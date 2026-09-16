@@ -1,11 +1,16 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getSiteContent, type SiteContent, type SiteTextRow } from "@/lib/content.functions";
-import { org, jobOffers } from "@/lib/site-data";
+import { org } from "@/lib/site-data";
 
 export const siteContentQuery = queryOptions({
   queryKey: ["site-content"],
   queryFn: () => getSiteContent(),
-  staleTime: 30_000,
+  staleTime: 0,
+  refetchInterval: 30_000,
+  refetchIntervalInBackground: false,
+  refetchOnMount: "always",
+  refetchOnWindowFocus: "always",
+  refetchOnReconnect: "always",
 });
 
 export function textOf(texts: SiteTextRow[] | undefined, key: string, fallback: string) {
@@ -32,24 +37,4 @@ export function contactInfo(content: SiteContent | undefined) {
         ].filter((x) => x.href)
       : org.socials.map((x) => ({ label: x.label, href: x.href })),
   };
-}
-
-export function jobsOf(content: SiteContent | undefined) {
-  if (content?.jobs?.length) return content.jobs;
-  return jobOffers.map((j, i) => ({
-    id: j.slug,
-    slug: j.slug,
-    title: j.title,
-    type: j.type,
-    lieu: j.lieu,
-    departement: j.departement,
-    deadline: j.deadline,
-    resume: j.resume,
-    missions: j.missions,
-    profil: j.profil,
-    published: true,
-    sort_order: i,
-    created_at: "",
-    updated_at: "",
-  }));
 }

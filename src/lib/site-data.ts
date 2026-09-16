@@ -48,7 +48,6 @@ export const navigation = [
   { label: "Passez à l'action", to: "/agir" },
   { label: "Nos Partenaires", to: "/partenaires" },
   { label: "Actualités", to: "/actualites" },
-  { label: "Emploi", to: "/emploi" },
   { label: "Galerie", to: "/galerie" },
   { label: "Contact", to: "/contact" },
 ] as const;
@@ -326,7 +325,7 @@ export const partnerCategories = [
 export type Article = {
   slug: string;
   title: string;
-  category: "Actualités" | "Communiqués" | "Rapports" | "Événements" | "Offres d'emploi" | "Appels d'offres" | "Volontariat";
+  category: "Actualités" | "Communiqués" | "Rapports" | "Événements" | "Appels d'offres" | "Volontariat";
   date: string;
   excerpt: string;
   image: string;
@@ -364,14 +363,6 @@ export const articles: Article[] = [
     date: "18 avril 2026",
     excerpt: "Deux jours d'échanges entre communautés, autorités et partenaires humanitaires.",
     image: media.grain,
-  },
-  {
-    slug: "offre-chargee-programmes",
-    title: "Recrutement : Chargé(e) de Programmes SAME – Goma",
-    category: "Offres d'emploi",
-    date: "10 avril 2026",
-    excerpt: "Rejoignez nos équipes terrain pour piloter les projets de sécurité alimentaire au Nord-Kivu.",
-    image: media.haricot,
   },
   {
     slug: "appel-offres-transport",
@@ -435,97 +426,3 @@ export const paymentMethods = [
   "Virement bancaire",
 ];
 
-export type JobOffer = {
-  slug: string;
-  title: string;
-  type: "CDD" | "CDI" | "Consultance" | "Stage" | "Volontariat";
-  lieu: string;
-  departement: string;
-  deadline: string;
-  resume: string;
-  missions: string[];
-  profil: string[];
-};
-
-export const jobOffers: JobOffer[] = [
-  {
-    slug: "charge-projet-same",
-    title: "Chargé(e) de projet Sécurité Alimentaire (SAME)",
-    type: "CDD",
-    lieu: "Goma, Nord-Kivu",
-    departement: "Programmes",
-    deadline: "30 septembre 2026",
-    resume:
-      "Piloter la mise en œuvre des activités agricoles et d'agroécologie auprès des groupements de producteurs.",
-    missions: [
-      "Planifier et superviser les activités de terrain du programme SAME",
-      "Assurer le suivi budgétaire et la qualité des livrables",
-      "Coordonner avec les autorités locales et les partenaires techniques",
-    ],
-    profil: [
-      "Diplôme en agronomie, développement rural ou équivalent",
-      "3 ans d'expérience minimum en ONG humanitaire",
-      "Excellente maîtrise du français et du swahili",
-    ],
-  },
-  {
-    slug: "officier-protection-vbg",
-    title: "Officier(ère) Protection et VBG",
-    type: "CDD",
-    lieu: "Bukavu, Sud-Kivu",
-    departement: "Protection",
-    deadline: "15 octobre 2026",
-    resume:
-      "Renforcer les mécanismes communautaires de prévention et de réponse aux violences basées sur le genre.",
-    missions: [
-      "Animer les espaces sûrs et les comités de protection",
-      "Assurer la gestion de cas selon les standards internationaux",
-      "Former les relais communautaires et rapporter les incidents",
-    ],
-    profil: [
-      "Formation en sciences sociales, psychologie ou droit",
-      "Expérience confirmée en gestion de cas VBG",
-      "Sens élevé de la confidentialité et de l'éthique",
-    ],
-  },
-  {
-    slug: "assistant-mel",
-    title: "Assistant(e) Suivi-Évaluation, Redevabilité et Apprentissage",
-    type: "CDI",
-    lieu: "Bunia, Ituri",
-    departement: "MEAL",
-    deadline: "5 octobre 2026",
-    resume:
-      "Produire des données fiables pour mesurer l'impact de nos programmes et nourrir l'apprentissage organisationnel.",
-    missions: [
-      "Concevoir les outils de collecte et superviser les enquêtes",
-      "Analyser les données et rédiger les rapports d'impact",
-      "Gérer le mécanisme de plainte et de retour d'information",
-    ],
-    profil: [
-      "Maîtrise de KoboToolbox, Excel et d'un outil de visualisation",
-      "2 ans d'expérience en suivi-évaluation",
-      "Rigueur analytique et esprit de synthèse",
-    ],
-  },
-  {
-    slug: "stage-communication",
-    title: "Stagiaire Communication et Plaidoyer",
-    type: "Stage",
-    lieu: "Goma, Nord-Kivu",
-    departement: "Communication",
-    deadline: "20 septembre 2026",
-    resume:
-      "Appuyer la production de contenus digitaux et la valorisation des histoires de changement du terrain.",
-    missions: [
-      "Rédiger des articles et publications réseaux sociaux",
-      "Réaliser des reportages photo et vidéo",
-      "Contribuer au rapport annuel de l'organisation",
-    ],
-    profil: [
-      "Étudiant(e) ou jeune diplômé(e) en communication",
-      "Bonne plume en français, l'anglais est un atout",
-      "Maîtrise des outils de création graphique",
-    ],
-  },
-];

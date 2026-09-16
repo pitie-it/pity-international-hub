@@ -12,17 +12,19 @@ export const Route = createFileRoute("/actualites")({
       {
         name: "description",
         content:
-          "Actualités, communiqués, rapports, événements, offres d'emploi, appels d'offres et opportunités de volontariat de Pitié Internationale.",
+          "Actualités, communiqués, rapports, événements, appels d'offres et initiatives de Pitié Internationale.",
       },
       { property: "og:title", content: "Actualités — Pitié Internationale" },
       { property: "og:description", content: "Toutes les nouvelles du terrain et nos opportunités." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "/actualites" },
     ],
     links: [{ rel: "canonical", href: "/actualites" }],
   }),
 });
 
-const categories = ["Toutes", "Actualités", "Communiqués", "Rapports", "Événements", "Offres d'emploi", "Appels d'offres", "Volontariat"];
+const categories = ["Toutes", "Actualités", "Communiqués", "Rapports", "Événements", "Appels d'offres", "Volontariat"];
 
 function Actualites() {
   const [filter, setFilter] = useState("Toutes");
@@ -33,7 +35,7 @@ function Actualites() {
       <PageHero
         eyebrow="Actualités"
         title="Nouvelles du terrain, rapports et opportunités"
-        subtitle="Suivez l'évolution de nos programmes, nos publications institutionnelles et nos appels à candidatures."
+        subtitle="Suivez l'évolution de nos programmes, nos publications institutionnelles et nos initiatives."
         image={media.grain}
       />
 
