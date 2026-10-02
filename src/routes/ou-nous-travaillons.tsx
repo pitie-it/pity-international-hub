@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
 import { CongoMap } from "@/components/site/CongoMap";
-import { media, provinces } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { siteContentQuery, programsOf, provincesOf, articlesOf } from "@/lib/content";
+
 
 export const Route = createFileRoute("/ou-nous-travaillons")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery),
   component: OuNousTravaillons,
   head: () => ({
     meta: [
@@ -22,6 +26,7 @@ export const Route = createFileRoute("/ou-nous-travaillons")({
 });
 
 function OuNousTravaillons() {
+  const provinces = provincesOf(useSuspenseQuery(siteContentQuery).data);
   return (
     <>
       <PageHero
@@ -32,7 +37,7 @@ function OuNousTravaillons() {
       />
 
       <section className="container-page py-20 sm:py-24">
-        <CongoMap />
+        <CongoMap provinces={provinces} />
       </section>
 
       <section className="bg-secondary/50 py-20 sm:py-24">

@@ -1,9 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { media, programmes } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { siteContentQuery, programsOf, provincesOf, articlesOf } from "@/lib/content";
+
 
 export const Route = createFileRoute("/programmes/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery),
   component: Programmes,
   head: () => ({
     meta: [
@@ -23,6 +27,7 @@ export const Route = createFileRoute("/programmes/")({
 });
 
 function Programmes() {
+  const programmes = programsOf(useSuspenseQuery(siteContentQuery).data);
   return (
     <>
       <PageHero
