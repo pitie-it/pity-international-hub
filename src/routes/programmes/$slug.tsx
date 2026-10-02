@@ -16,7 +16,7 @@ export const Route = createFileRoute("/programmes/$slug")({
   component: ProgrammeDetail,
   errorComponent: ({ error }) => (
     <div className="container-page py-24 text-center" role="alert">
-      {error.message}
+      {error instanceof Error ? error.message : "Erreur"}
     </div>
   ),
   notFoundComponent: () => (
