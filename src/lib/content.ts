@@ -52,11 +52,13 @@ export function imageOf(key: string | undefined) {
 export function programsOf(content: SiteContent | undefined): Programme[] {
   const rows = content?.programmes;
   if (!rows?.length) return staticProgrammes;
-  return rows.map((r) => ({
+  return rows.map((r): Programme => {
+    const temoignage = staticProgrammes.find((p) => p.slug === r.slug)?.temoignage;
+    return {
+    ...(temoignage ? { temoignage } : {}),
     slug: r.slug, title: r.title, tagline: r.tagline, image: imageOf(r.image_key),
     presentation: r.presentation, objectifs: r.objectifs, activites: r.activites, resultats: r.resultats,
-    temoignage: staticProgrammes.find((p) => p.slug === r.slug)?.temoignage,
-  }));
+  }; });
 }
 
 export type ProvinceView = { slug: string; name: string; chef: string; text: string; programmes: string[]; beneficiaires: string; x: number; y: number };

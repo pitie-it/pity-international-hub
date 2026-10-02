@@ -59,11 +59,11 @@ const articleFields: Field[] = [
   { key: "image_key", label: "Photo", type: "select", options: imageKeys },
 ];
 /** Nettoie les listes (lignes vides) et l'adresse courte. */
-function clean<T extends Record<string, any>>(r: T): T {
-  const out: Record<string, any> = { ...r };
+function clean(r: any): Record<string, unknown> {
+  const out: any = { ...r };
   for (const k of Object.keys(out)) if (Array.isArray(out[k])) out[k] = out[k].map((x: string) => x.trim()).filter(Boolean);
   if (typeof out.slug === "string") out.slug = out.slug.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  return out as T;
+  return out;
 }
 
 const emptyTestimonial: TestimonialInput = { quote: "", author: "", role_label: "", sort_order: 0, published: true };

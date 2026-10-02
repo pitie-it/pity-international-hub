@@ -178,10 +178,10 @@ export const deleteTestimonial = createServerFn({ method: "POST" })
 
 type Table = "programmes" | "provinces" | "news_articles";
 
-function crud<T extends { id?: string }>(table: Table) {
+function crud(table: Table) {
   const save = createServerFn({ method: "POST" })
     .middleware([requireSupabaseAuth])
-    .inputValidator((data: T) => data)
+    .inputValidator((data: Record<string, unknown>) => data)
     .handler(async ({ data, context }) => {
       await assertAdmin(context.supabase, context.userId);
       const { id, ...fields } = data as any;
@@ -198,9 +198,9 @@ function crud<T extends { id?: string }>(table: Table) {
 
 const delValidator = (data: { id: string }) => data;
 
-export const saveProgram = crud<Partial<ProgramRow>>("programmes");
-export const saveProvince = crud<Partial<ProvinceRow>>("provinces");
-export const saveArticle = crud<Partial<ArticleRow>>("news_articles");
+export const saveProgram = crud("programmes");
+export const saveProvince = crud("provinces");
+export const saveArticle = crud("news_articles");
 
 export const deleteRow = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])

@@ -14,7 +14,8 @@ export type Field = {
   required?: boolean;
 };
 
-type Row = Record<string, any> & { id?: string };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Row = any;
 
 export function RowEditor({
   title, rows, fields, empty, busy, onSave, onDelete, summary,
