@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { FileText, LogOut, MapPin, MessageSquareQuote, Save, Trash2 } from "lucide-react";
+import { FileText, LogOut, Map, MapPin, MessageSquareQuote, Newspaper, Save, Sprout, Trash2 } from "lucide-react";
+import { RowEditor, type Field } from "@/components/admin/RowEditor";
+import { imageKeys } from "@/lib/content";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -11,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  deleteTestimonial, getAdminContent, isAdmin, saveSettings,
+  deleteTestimonial, getAdminContent, saveProgram, saveProvince, saveArticle, deleteRow, isAdmin, saveSettings,
   saveTestimonial, saveTexts, type SiteContent, type TestimonialInput,
 } from "@/lib/content.functions";
 
@@ -26,6 +28,43 @@ export const Route = createFileRoute("/_authenticated/admin")({
     { name: "twitter:card", content: "summary" },
   ]}),
 });
+
+const categoriesList = ["Actualités", "Communiqués", "Rapports", "Événements", "Appels d'offres", "Volontariat"] as const;
+const slugField: Field = { key: "slug", label: "Adresse courte (ex. sante-communautaire)", type: "text", required: true };
+const programFields: Field[] = [
+  { key: "title", label: "Titre", type: "text", required: true }, slugField,
+  { key: "tagline", label: "Accroche", type: "text" },
+  { key: "image_key", label: "Photo", type: "select", options: imageKeys },
+  { key: "presentation", label: "Présentation", type: "textarea" },
+  { key: "objectifs", label: "Objectifs", type: "list" },
+  { key: "activites", label: "Activités", type: "list" },
+  { key: "resultats", label: "Résultats", type: "list" },
+  { key: "sort_order", label: "Ordre d'affichage", type: "number" },
+];
+const provinceFields: Field[] = [
+  { key: "name", label: "Nom", type: "text", required: true }, slugField,
+  { key: "chef_lieu", label: "Chef-lieu", type: "text" },
+  { key: "description", label: "Description", type: "textarea" },
+  { key: "programmes", label: "Programmes menés", type: "list" },
+  { key: "beneficiaires", label: "Bénéficiaires (ex. 48 000+)", type: "text" },
+  { key: "map_x", label: "Position sur la carte — horizontale (0 à 100)", type: "number" },
+  { key: "map_y", label: "Position sur la carte — verticale (0 à 100)", type: "number" },
+  { key: "sort_order", label: "Ordre d'affichage", type: "number" },
+];
+const articleFields: Field[] = [
+  { key: "title", label: "Titre", type: "text", required: true }, slugField,
+  { key: "category", label: "Catégorie", type: "select", options: categoriesList },
+  { key: "published_on", label: "Date", type: "date", required: true },
+  { key: "excerpt", label: "Résumé", type: "textarea" },
+  { key: "image_key", label: "Photo", type: "select", options: imageKeys },
+];
+/** Nettoie les listes (lignes vides) et l'adresse courte. */
+function clean<T extends Record<string, any>>(r: T): T {
+  const out: Record<string, any> = { ...r };
+  for (const k of Object.keys(out)) if (Array.isArray(out[k])) out[k] = out[k].map((x: string) => x.trim()).filter(Boolean);
+  if (typeof out.slug === "string") out.slug = out.slug.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return out as T;
+}
 
 const emptyTestimonial: TestimonialInput = { quote: "", author: "", role_label: "", sort_order: 0, published: true };
 
@@ -72,9 +111,12 @@ function AdminPage() {
       </div>
 
       <Tabs defaultValue="texts" className="mt-8">
-        <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-3">
+        <TabsList className="grid h-auto w-full grid-cols-2 gap-1 sm:grid-cols-3 lg:grid-cols-6">
           <TabsTrigger value="texts"><FileText className="size-4" /> Textes</TabsTrigger>
           <TabsTrigger value="testimonials"><MessageSquareQuote className="size-4" /> Témoignages</TabsTrigger>
+          <TabsTrigger value="programmes"><Sprout className="size-4" /> Programmes</TabsTrigger>
+          <TabsTrigger value="provinces"><Map className="size-4" /> Provinces</TabsTrigger>
+          <TabsTrigger value="articles"><Newspaper className="size-4" /> Actualités</TabsTrigger>
           <TabsTrigger value="settings"><MapPin className="size-4" /> Coordonnées</TabsTrigger>
         </TabsList>
 
@@ -101,6 +143,25 @@ function AdminPage() {
             </form>
             <div className="grid gap-3">{content.testimonials.map((t) => <article key={t.id} className="card-surface p-5"><blockquote className="text-sm">« {t.quote} »</blockquote><p className="mt-3 font-semibold">{t.author}</p><p className="text-xs text-muted-foreground">{t.role_label} · {t.published ? "Publié" : "Masqué"}</p><div className="mt-4 flex gap-2"><Button size="sm" variant="outline" onClick={() => setTestimonial({ id: t.id, quote: t.quote, author: t.author, role_label: t.role_label, sort_order: t.sort_order, published: t.published })}>Modifier</Button><Button size="icon" variant="destructive" aria-label="Supprimer" onClick={() => run(() => deleteTestimonial({ data: { id: t.id } }), "Témoignage supprimé")}><Trash2 className="size-4" /></Button></div></article>)}</div>
           </div>
+        </TabsContent>
+
+        <TabsContent value="programmes" className="mt-8">
+          <RowEditor title="programme" rows={content.programmes} fields={programFields} busy={busy} summary={(r) => r.title}
+            empty={{ slug: "", title: "", tagline: "", image_key: "recolte", presentation: "", objectifs: [], activites: [], resultats: [], published: true, sort_order: content.programmes.length + 1 }}
+            onSave={(r) => run(() => saveProgram({ data: clean(r) }), "Programme enregistré")}
+            onDelete={(id) => void run(() => deleteRow({ data: { table: "programmes", id } }), "Programme supprimé")} />
+        </TabsContent>
+        <TabsContent value="provinces" className="mt-8">
+          <RowEditor title="province" rows={content.provinces} fields={provinceFields} busy={busy} summary={(r) => `${r.name} — ${r.chef_lieu}`}
+            empty={{ slug: "", name: "", chef_lieu: "", description: "", programmes: [], beneficiaires: "", map_x: 60, map_y: 50, published: true, sort_order: content.provinces.length + 1 }}
+            onSave={(r) => run(() => saveProvince({ data: clean(r) }), "Province enregistrée")}
+            onDelete={(id) => void run(() => deleteRow({ data: { table: "provinces", id } }), "Province supprimée")} />
+        </TabsContent>
+        <TabsContent value="articles" className="mt-8">
+          <RowEditor title="actualité" rows={content.articles} fields={articleFields} busy={busy} summary={(r) => `${r.published_on} · ${r.title}`}
+            empty={{ slug: "", title: "", category: "Actualités", published_on: new Date().toISOString().slice(0, 10), excerpt: "", image_key: "suivi", published: true, sort_order: 0 }}
+            onSave={(r) => run(() => saveArticle({ data: clean(r) }), "Actualité enregistrée")}
+            onDelete={(id) => void run(() => deleteRow({ data: { table: "news_articles", id } }), "Actualité supprimée")} />
         </TabsContent>
 
         <TabsContent value="settings" className="mt-8">
