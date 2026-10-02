@@ -2,10 +2,13 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { ArrowLeft, CheckCircle2, Quote, Target, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { programmes, type Programme } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { siteContentQuery, programsOf, provincesOf, articlesOf } from "@/lib/content";
+
 
 export const Route = createFileRoute("/programmes/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
+    const programmes = programsOf(await context.queryClient.ensureQueryData(siteContentQuery));
     const programme = programmes.find((p) => p.slug === params.slug);
     if (!programme) throw notFound();
     return { programme };
@@ -13,7 +16,7 @@ export const Route = createFileRoute("/programmes/$slug")({
   component: ProgrammeDetail,
   errorComponent: ({ error }) => (
     <div className="container-page py-24 text-center" role="alert">
-      {error.message}
+      {error instanceof Error ? error.message : "Erreur"}
     </div>
   ),
   notFoundComponent: () => (
@@ -38,7 +41,9 @@ export const Route = createFileRoute("/programmes/$slug")({
 });
 
 function ProgrammeDetail() {
-  const { programme } = Route.useLoaderData() as { programme: Programme };
+  const { programme: initial } = Route.useLoaderData();
+  const programmes = programsOf(useSuspenseQuery(siteContentQuery).data);
+  const programme = programmes.find((p) => p.slug === initial.slug) ?? initial;
 
   return (
     <>
@@ -105,7 +110,7 @@ function ProgrammeDetail() {
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <img src={programme.image} alt={programme.title} loading="lazy" className="h-56 w-full rounded-2xl object-cover" />
                 <img
-                  src={programmes[(programmes.indexOf(programme) + 1) % programmes.length]!.image}
+                  src={programmes[(programmes.findIndex((p) => p.slug === programme.slug) + 1) % programmes.length]?.image ?? programme.image}
                   alt="Activités de terrain"
                   loading="lazy"
                   className="h-56 w-full rounded-2xl object-cover"

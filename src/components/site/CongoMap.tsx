@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import { motion } from "motion/react";
-import { provinces } from "@/lib/site-data";
+import type { ProvinceView } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-export function CongoMap() {
-  const [active, setActive] = useState(provinces[0]!.slug);
-  const current = provinces.find((p) => p.slug === active)!;
+export function CongoMap({ provinces }: { provinces: ProvinceView[] }) {
+  const [active, setActive] = useState(provinces[0]?.slug ?? "");
+  const current = provinces.find((p) => p.slug === active) ?? provinces[0];
+  if (!current) return null;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
@@ -18,8 +19,7 @@ export function CongoMap() {
             strokeWidth="0.8"
           />
           {provinces.map((p) => {
-            const coords = { "nord-kivu": [66, 40], "sud-kivu": [66, 56], ituri: [64, 26] } as Record<string, number[]>;
-            const [cx, cy] = coords[p.slug]!;
+            const cx = p.x, cy = p.y;
             const isActive = active === p.slug;
             return (
               <g key={p.slug} onMouseEnter={() => setActive(p.slug)} onClick={() => setActive(p.slug)} className="cursor-pointer">

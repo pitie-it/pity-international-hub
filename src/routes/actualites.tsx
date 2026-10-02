@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero, Reveal } from "@/components/site/primitives";
-import { articles, media } from "@/lib/site-data";
+import { media } from "@/lib/site-data";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { siteContentQuery, programsOf, provincesOf, articlesOf } from "@/lib/content";
+
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/actualites")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery),
   component: Actualites,
   head: () => ({
     meta: [
@@ -28,6 +32,7 @@ const categories = ["Toutes", "Actualités", "Communiqués", "Rapports", "Évén
 
 function Actualites() {
   const [filter, setFilter] = useState("Toutes");
+  const articles = articlesOf(useSuspenseQuery(siteContentQuery).data);
   const list = filter === "Toutes" ? articles : articles.filter((a) => a.category === filter);
 
   return (
