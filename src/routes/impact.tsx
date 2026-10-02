@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Counter, PageHero, Reveal, SectionHeading } from "@/components/site/primitives";
 import { impactStats, media, provinces } from "@/lib/site-data";
 import { CongoMap } from "@/components/site/CongoMap";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { siteContentQuery, provincesOf } from "@/lib/content";
 
 export const Route = createFileRoute("/impact")({
   component: Impact,
@@ -54,7 +56,7 @@ function Impact() {
             subtitle="Survolez ou sélectionnez une province pour découvrir nos interventions."
           />
           <div className="mt-14">
-            <CongoMap />
+            <CongoMap provinces={provincesOf(useSuspenseQuery(siteContentQuery).data)} />
           </div>
         </div>
       </section>
