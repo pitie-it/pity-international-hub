@@ -27,13 +27,15 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("pitieinternationalrdc@gmail.com");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
     try {
       if (mode === "create") {
-        const { error } = await supabase.auth.signUp({ email, password });
+        if (password !== confirm) throw new Error("Les deux mots de passe ne correspondent pas");
+        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/auth` } });
         if (error) throw error;
         toast.success("Compte créé. Consultez votre e-mail pour confirmer votre inscription.");
         setMode("login");
@@ -58,6 +60,7 @@ function AuthPage() {
         <form onSubmit={submit} className="mt-7 grid gap-5 text-left">
           <div className="grid gap-2"><Label htmlFor="admin-email">Adresse e-mail</Label><Input id="admin-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} readOnly required /></div>
           <div className="grid gap-2"><Label htmlFor="admin-password">Mot de passe</Label><Input id="admin-password" type="password" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
+          {mode === "create" && <div className="grid gap-2"><Label htmlFor="admin-confirm">Confirmer le mot de passe</Label><Input id="admin-confirm" type="password" minLength={8} value={confirm} onChange={(e) => setConfirm(e.target.value)} required /></div>}
           <Button type="submit" disabled={busy}>{busy ? "Veuillez patienter…" : mode === "login" ? "Se connecter" : "Créer le compte"}</Button>
         </form>
         <Button variant="link" className="mt-4 w-full" onClick={() => setMode(mode === "login" ? "create" : "login")}>{mode === "login" ? "Première connexion ? Créer le compte" : "J'ai déjà un compte"}</Button>

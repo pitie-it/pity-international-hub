@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { FileText, LogOut, Map, MapPin, MessageSquareQuote, Newspaper, Save, Sprout, Trash2 } from "lucide-react";
+import { FileText, LogOut, Map as MapIcon, MapPin, MessageSquareQuote, Newspaper, Save, Sprout, Trash2 } from "lucide-react";
 import { RowEditor, type Field } from "@/components/admin/RowEditor";
 import { imageKeys } from "@/lib/content";
 import { toast } from "sonner";
@@ -115,7 +115,7 @@ function AdminPage() {
           <TabsTrigger value="texts"><FileText className="size-4" /> Textes</TabsTrigger>
           <TabsTrigger value="testimonials"><MessageSquareQuote className="size-4" /> Témoignages</TabsTrigger>
           <TabsTrigger value="programmes"><Sprout className="size-4" /> Programmes</TabsTrigger>
-          <TabsTrigger value="provinces"><Map className="size-4" /> Provinces</TabsTrigger>
+          <TabsTrigger value="provinces"><MapIcon className="size-4" /> Provinces</TabsTrigger>
           <TabsTrigger value="articles"><Newspaper className="size-4" /> Actualités</TabsTrigger>
           <TabsTrigger value="settings"><MapPin className="size-4" /> Coordonnées</TabsTrigger>
         </TabsList>
