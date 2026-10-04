@@ -3,3 +3,4 @@
 - [x] Vérifier l'affichage et le fonctionnement
 - [x] Supprimer la rubrique Emploi du site et de l'administration
 - [x] Actualiser automatiquement les contenus publics enregistrés
+- [ ] Fournir une édition statique HTML/CSS/JavaScript classique et professionnelle, sans la rubrique Emploi
